@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 type IllustrationItemProps = {
   title: string;
@@ -9,6 +10,7 @@ type IllustrationItemProps = {
 
 export function Illustration({ title, src, link }: IllustrationItemProps) {
   const [open, setOpen] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
     <>
@@ -47,13 +49,26 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
             className="mb-2 h-64 w-full rounded-md object-cover sm:mb-4 sm:h-96"
           />
           <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
-          <a
-            href={link}
-            download
-            className="rounded bg-[#6469ff] px-4 py-2 text-white hover:bg-indigo-500"
-          >
-            Download SVG
-          </a>
+          {session ? (
+            <>
+              <a
+                href={link}
+                download
+                className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Download SVG
+              </a>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => signIn("github").catch(console.log)}
+                className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Sign In
+              </button>
+            </>
+          )}
         </div>
       </Modal>
     </>
