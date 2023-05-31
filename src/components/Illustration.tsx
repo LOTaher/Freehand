@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+// import Image from "next/image";
 
 type IllustrationItemProps = {
   title: string;
@@ -10,7 +11,7 @@ type IllustrationItemProps = {
 
 export function Illustration({ title, src, link }: IllustrationItemProps) {
   const [open, setOpen] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   return (
     <>

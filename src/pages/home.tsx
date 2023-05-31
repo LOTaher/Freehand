@@ -2,10 +2,11 @@
 import { api } from "~/utils/api";
 import { Navbar } from "../components/Navbar";
 import { Illustration } from "~/components/Illustration";
+import { useSession } from "next-auth/react";
 
 export default function Main() {
-  // const illustrations = await prisma.illustrations.findMany();
-  const { data } = api.illustrations.getAll.useQuery();
+  const { data: illustrations } = api.illustrations.getAll.useQuery();
+  const { data: session } = useSession();
 
   return (
     <>
@@ -17,9 +18,10 @@ export default function Main() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.
         </p>
       </div>
+      {/*session?.user.role === "ADMIN" && <div>Upload Here</div>*/}
       <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-3 lg:max-w-7xl lg:px-7">
         <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {data?.map((illustration) => (
+          {illustrations?.map((illustration) => (
             <Illustration key={illustration.id} {...illustration} />
           ))}
         </div>
