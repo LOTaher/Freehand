@@ -2,13 +2,12 @@ import { useState } from "react";
 import { Modal } from "./Modal";
 
 type IllustrationItemProps = {
-  id: bigint;
-  name: string;
+  title: string;
   src: string;
   link: string;
 };
 
-export function Illustration({ id, name, src, link }: IllustrationItemProps) {
+export function Illustration({ title, src, link }: IllustrationItemProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -18,7 +17,7 @@ export function Illustration({ id, name, src, link }: IllustrationItemProps) {
           <div className="aspect-w-1 aspect-h-1 xl:aspect-w-1 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200">
             {/*eslint-disable-next-line @next/next/no-img-element*/}
             <img
-              alt={name}
+              alt={title}
               src={src}
               className="cursor-pointer group-hover:opacity-75"
             />
@@ -26,7 +25,7 @@ export function Illustration({ id, name, src, link }: IllustrationItemProps) {
         </a>
         <div className="mt-4 inline-flex items-baseline gap-2">
           <h2 className="cursor-pointer text-base font-semibold leading-snug text-gray-700 sm:text-3xl md:text-2xl lg:text-xl">
-            {name}
+            {title}
           </h2>
           {/*}
           <Link
@@ -44,10 +43,10 @@ export function Illustration({ id, name, src, link }: IllustrationItemProps) {
           {/*eslint-disable-next-line @next/next/no-img-element*/}
           <img
             src={src}
-            alt={name}
+            alt={title}
             className="mb-2 h-64 w-full rounded-md object-cover sm:mb-4 sm:h-96"
           />
-          <h2 className="mb-1 py-1 text-2xl font-bold">{name}</h2>
+          <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
           <a
             href={link}
             download
