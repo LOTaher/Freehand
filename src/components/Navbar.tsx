@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 export function Navbar() {
   const { data: session, status } = useSession();
@@ -43,6 +44,16 @@ export function Navbar() {
         </Link>
         {session ? (
           <>
+            <div className="px-4">
+              <Image
+                src={session.user.image as string}
+                width={40}
+                height={40}
+                alt="Profile Picture"
+                className="rounded-full"
+              />
+            </div>
+
             <button
               className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={() => {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { signIn, useSession } from "next-auth/react";
-// import Image from "next/image";
+import Image from "next/image";
 
 type IllustrationItemProps = {
   title: string;
@@ -18,9 +18,10 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
       <div className="rounded-md border border-[#e6ebf4] p-3">
         <a onClick={() => setOpen(true)}>
           <div className="aspect-w-1 aspect-h-1 xl:aspect-w-1 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200">
-            {/*eslint-disable-next-line @next/next/no-img-element*/}
-            <img
+            <Image
               alt={title}
+              width={520}
+              height={520}
               src={src}
               className="cursor-pointer group-hover:opacity-75"
             />
@@ -43,9 +44,10 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col items-center p-2 sm:p-4">
-          {/*eslint-disable-next-line @next/next/no-img-element*/}
-          <img
+          <Image
             src={src}
+            width={540}
+            height={540}
             alt={title}
             className="mb-2 h-64 w-full rounded-md object-cover sm:mb-4 sm:h-96"
           />
