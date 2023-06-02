@@ -9,9 +9,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import { useBuySubscription } from "~/hooks/useBuySubscription";
 
 export function Navbar() {
   const { data: session, status } = useSession();
+
+  const { buySubscription } = useBuySubscription();
 
   return (
     <header className="bg-gray flex w-full flex-wrap items-center justify-between border-b border-b-[#e6ebf4] px-4 py-4 sm:px-8">
@@ -30,22 +33,24 @@ export function Navbar() {
       <div className="mt-4 flex items-center sm:mt-0">
         <Link
           href="/about"
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
+          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900 "
         >
           About
         </Link>
         <Link
           href="/search"
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
+          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900 "
         >
           Search
         </Link>
-        <Link
-          href="/support"
+        <button
+          onClick={() => {
+            buySubscription().catch(console.error);
+          }}
           className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
         >
           Plan
-        </Link>
+        </button>
         <Link
           href="/home"
           className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
@@ -88,7 +93,7 @@ export function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="mx-auto my-1 rounded-md border bg-white px-2 py-1">
                 <DropdownMenuItem className="font-inter rounded-md px-3 py-2 text-center font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                  <Link href="/plan">Tier: Free</Link>
+                  <Link href="/plan">Tier: {session.user.subscription}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
                 <DropdownMenuItem className="font-inter rounded-md bg-[#6469ff] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-indigo-500 focus:outline-none">
