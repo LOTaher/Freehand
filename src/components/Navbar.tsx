@@ -10,8 +10,15 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
+import { useState } from "react";
+import { Modal } from "./Modal";
+import { UploadButton } from "@uploadthing/react";
+import toast, { Toaster } from "react-hot-toast";
+import type { OurFileRouter } from "~/server/uploadthing";
+import "@uploadthing/react/styles.css";
 
 export function Navbar() {
+  const [open, setOpen] = useState(false);
   const { data: session, status } = useSession();
 
   const { buySubscription } = useBuySubscription();
@@ -96,6 +103,17 @@ export function Navbar() {
                   <Link href="/plan">Tier: {session.user.subscription}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
+                {session.user.role === "ADMIN" && (
+                  <DropdownMenuItem>
+                    <button
+                      className="font-inter rounded-md px-3 py-2 text-center font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none"
+                      onClick={() => setOpen(true)}
+                    >
+                      * Upload *
+                    </button>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuSeparator className="my-1 border-gray-200" />
                 <DropdownMenuItem className="font-inter rounded-md bg-[#6469ff] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-indigo-500 focus:outline-none">
                   <button
                     className="focus:outline-none"
@@ -108,6 +126,48 @@ export function Navbar() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
+            <Modal open={open} onClose={() => setOpen(false)}>
+              <div className="">
+                <h1 className="text-center text-[40px] font-extrabold">
+                  File Upload Guide
+                </h1>
+                <p className="text-center text-[20px]">
+                  The file&apos;s dimensions must be 800 x 540
+                </p>
+                {/*
+                <p className="text-center text-[15px]">
+                  width: 800 | height: 540
+                </p>
+                 */}
+                <p className="text-center text-[20px]">
+                  Make the file&apos;s name the title of the illustration
+                </p>
+                {/*
+                <p className="text-center text-[15px]">
+                  Underscores in the file name will be returned as spaces!
+                </p>
+                */}
+                <p className="pb-3 text-center text-[20px]">
+                  .SVG files only please
+                </p>
+                <UploadButton<OurFileRouter>
+                  endpoint="illustrationUpload"
+                  onClientUploadComplete={(res) => {
+                    // Do something with the response
+                    console.log("Files: ", res?.[0]?.fileUrl);
+                    setTimeout(() => {
+                      setOpen(false);
+                    }, 1000);
+                    toast.success("Upload Completed");
+                  }}
+                  onUploadError={(error: Error) => {
+                    // Do something with the error.
+                    toast.error(`ERROR! ${error.message}`);
+                  }}
+                />
+                <Toaster />
+              </div>
+            </Modal>
           </>
         )}
         {status === "unauthenticated" && (

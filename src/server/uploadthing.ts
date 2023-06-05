@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { createUploadthing, type FileRouter } from "uploadthing/next-legacy";
 import { prisma } from "~/server/db";
+import { api } from "~/utils/api";
 import { getServerAuthSession } from "~/server/auth";
 import type { NextApiRequest } from "next";
 import type { IncomingMessage, ServerResponse } from "http";
@@ -30,9 +31,16 @@ export const ourFileRouter = {
     })
     // Set permissions and file types for this FileRoute
     .onUploadComplete(async ({ file }) => {
-      // This code RUNS ON YOUR SERVER after upload
       console.log("Upload complete");
-      console.log("file url", file.url);
+
+      const filename = file.name.substring(0, file.name.lastIndexOf("."));
+      await prisma.illustration.create({
+        data: {
+          title: filename.replace(/_/g, " "),
+          src: file.url,
+          link: file.url,
+        },
+      });
     }),
 } satisfies FileRouter;
 
