@@ -104,12 +104,9 @@ export function Navbar() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
                 {session.user.role === "ADMIN" && (
-                  <DropdownMenuItem>
-                    <button
-                      className="font-inter rounded-md px-3 py-2 text-center font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none"
-                      onClick={() => setOpen(true)}
-                    >
-                      * Upload *
+                  <DropdownMenuItem className="font-inter rounded-md px-3 py-2 text-center font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
+                    <button className="" onClick={() => setOpen(true)}>
+                      Upload
                     </button>
                   </DropdownMenuItem>
                 )}
@@ -157,7 +154,7 @@ export function Navbar() {
                     console.log("Files: ", res?.[0]?.fileUrl);
                     setTimeout(() => {
                       setOpen(false);
-                    }, 1000);
+                    }, 2000);
                     toast.success("Upload Completed");
                   }}
                   onUploadError={(error: Error) => {
@@ -165,9 +162,9 @@ export function Navbar() {
                     toast.error(`ERROR! ${error.message}`);
                   }}
                 />
-                <Toaster />
               </div>
             </Modal>
+            <Toaster />
           </>
         )}
         {status === "unauthenticated" && (
