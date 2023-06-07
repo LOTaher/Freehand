@@ -37,7 +37,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
     switch (event.type) {
       case "checkout.session.completed":
-        const completedEvent = event.data.object as {
+        const checkoutSessionCompleted = event.data.object as {
           id: string;
           metadata: {
             userId: string;
@@ -46,7 +46,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
 
         await prisma.user.update({
           where: {
-            id: completedEvent.metadata.userId,
+            id: checkoutSessionCompleted.metadata.userId,
           },
           data: {
             subscription: "PRO",
@@ -54,7 +54,41 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
         });
         break;
 
-      // handle other event types: subscription payment, subscription cancellation, etc.
+      case "subscription.payment_succeeded":
+        const subscriptionPaymentSucceeded = event.data.object as {
+          id: string;
+          metadata: {
+            userId: string;
+          };
+        };
+
+        await prisma.user.update({
+          where: {
+            id: subscriptionPaymentSucceeded.metadata.userId,
+          },
+          data: {
+            subscription: "PRO",
+          },
+        });
+        break;
+
+      case "subscription.payment_failed":
+        const subscriptionPaymentFailed = event.data.object as {
+          id: string;
+          metadata: {
+            userId: string;
+          };
+        };
+
+        await prisma.user.update({
+          where: {
+            id: subscriptionPaymentFailed.metadata.userId,
+          },
+          data: {
+            subscription: "FREE",
+          },
+        });
+        break;
 
       default:
         console.log(`Unhandled event type ${event.type}`);
