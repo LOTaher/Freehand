@@ -17,14 +17,13 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
     <>
       <div>
         <a onClick={() => setOpen(true)}>
-          <div className="cursor-pointer rounded-md border border-[#e6ebf4] p-3">
-            <div className="aspect-w-1 aspect-h-1 xl:aspect-w-1 xl:aspect-h-8 w-full overflow-hidden rounded-lg bg-gray-200">
+          <div className="w-full cursor-pointer rounded-md border border-[#e6ebf4] p-3">
+            <div className="relative aspect-[1/1] w-full rounded-lg hover:opacity-90">
               <Image
                 alt={title}
-                width={520}
-                height={520}
+                fill
                 src={src}
-                className="pointer-events-none cursor-pointer group-hover:opacity-75"
+                className="pointer-events-none aspect-[1/1] w-full cursor-pointer"
               />
             </div>
 
@@ -32,15 +31,6 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
               <h2 className="cursor-pointer text-base font-semibold leading-snug text-gray-700 sm:text-3xl md:text-2xl lg:text-xl">
                 {title}
               </h2>
-
-              {/*}
-          <Link
-            href={downloadLink}
-            className="font-inter text-base sm:text-2xl md:text-xl lg:text-lg font-medium bg-[#6469ff] text-white px-2 py-1 rounded-md hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            SVG
-          </Link>
-          */}
             </div>
           </div>
         </a>
