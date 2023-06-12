@@ -2,9 +2,9 @@ import { loadStripe } from "@stripe/stripe-js";
 import { env } from "~/env.mjs";
 import { api } from "~/utils/api";
 
-const stripePromise = loadStripe(env.NEXT_PUBLIC_STRIPE_KEY);
+const stripePromise = loadStripe(`${env.NEXT_PUBLIC_STRIPE_KEY}`);
 
-export function buySubscription() {
+export function useBuySubscription() {
   const checkout = api.checkout.createCheckout.useMutation();
 
   return {
