@@ -1,33 +1,32 @@
 type ModalItemProps = {
-    open: boolean;
-    onClose: () => void;
-    children: React.ReactNode;
-  };
-  
-  export function Modal({ open, onClose, children }: ModalItemProps) {
-    return (
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
+
+export function Modal({ open, onClose, children }: ModalItemProps) {
+  return (
+    <div
+      onClick={onClose}
+      className={`fixed inset-0 flex items-center justify-center ${
+        open ? "visible" : "invisible"
+      } z-50 bg-black/20`}
+    >
       <div
-        onClick={onClose}
-        className={`fixed inset-0 flex justify-center items-center
-    ${
-      open ? "visible bg-black/20" : "invisible"
-    } aspect-w-3 aspect-h-2 sm:aspect-w-1 sm:aspect-h-1 lg:aspect-h-4`}
+        onClick={(e) => e.stopPropagation()}
+        className={`rounded-xl bg-white p-6 shadow ${
+          open ? "scale-100 opacity-100" : "scale-125 opacity-0"
+        }`}
+        style={{ width: "700px", height: "550px" }} // Adjust the size as desired
       >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className={`bg-white rounded-xl shadow p-6 ${
-            open ? "scale-100 opacity-100" : "scale-125 opacity-0"
-          }`}
+        <button
+          onClick={onClose}
+          className="absolute right-2 top-2 rounded-md bg-white p-1 text-gray-400 hover:text-gray-600"
         >
-          <button
-            onClick={onClose}
-            className="absolute top-2 right-2 p-1 rounded-md text-gray-400 bg-white hover:text-gray-600"
-          >
-            X
-          </button>
-          {children}
-        </div>
+          X
+        </button>
+        {children}
       </div>
-    );
-  }
-  
+    </div>
+  );
+}
