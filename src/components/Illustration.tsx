@@ -15,20 +15,21 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
 
   return (
     <>
-      <div>
+      <div className="">
         <a onClick={() => setOpen(true)}>
           <div className="w-full cursor-pointer rounded-md border border-[#e6ebf4] p-3">
-            <div className="relative aspect-[1/1] w-full rounded-lg hover:opacity-90">
+            <div className="aspect-[1/1] w-full rounded-lg hover:opacity-90 sm:px-2">
               <Image
                 alt={title}
-                fill
+                width={100}
+                height={100}
                 src={src}
                 className="pointer-events-none aspect-[1/1] w-full cursor-pointer"
               />
             </div>
 
             <div className="mt-4 inline-flex items-baseline gap-2">
-              <h2 className="cursor-pointer text-base font-semibold leading-snug text-gray-700 sm:text-3xl md:text-2xl lg:text-xl">
+              <h2 className="cursor-pointer text-base font-semibold text-gray-700 sm:text-3xl md:text-xl lg:text-xl">
                 {title}
               </h2>
             </div>
@@ -37,13 +38,13 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
       </div>
 
       <Modal open={open} onClose={() => setOpen(false)}>
-        <div className="flex flex-col items-center p-2 sm:p-4">
+        <div className="flex flex-col items-center p-2">
           <Image
             src={src}
-            width={540}
-            height={540}
+            width={100}
+            height={100}
             alt={title}
-            className="pointer-events-none mb-2 h-64 w-full rounded-md object-cover sm:mb-4 sm:h-96"
+            className="pointer-events-none mb-2 aspect-square h-96 w-[80%] rounded-md"
           />
           <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
           {session ? (

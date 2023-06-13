@@ -6,9 +6,17 @@ await import("./src/env.mjs");
 
 /** @type {import("next").NextConfig} */
 const config = {
+  experimental: {
+    esmExternals: false,
+  },
   reactStrictMode: true,
   images: {
-    domains: ["avatars.githubusercontent.com", "bit.ly", "cdn.discordapp.com"],
+    domains: [
+      "avatars.githubusercontent.com",
+      "bit.ly",
+      "cdn.discordapp.com",
+      "uploadthing.com",
+    ],
   },
 
   /**

@@ -8,7 +8,7 @@ export function Modal({ open, onClose, children }: ModalItemProps) {
   return (
     <div
       onClick={onClose}
-      className={`fixed inset-0 flex items-center justify-center ${
+      className={`fixed inset-0 flex items-center justify-center sm:p-4 ${
         open ? "visible" : "invisible"
       } z-50 bg-black/20`}
     >
@@ -17,7 +17,7 @@ export function Modal({ open, onClose, children }: ModalItemProps) {
         className={`rounded-xl bg-white p-6 shadow ${
           open ? "scale-100 opacity-100" : "scale-125 opacity-0"
         }`}
-        style={{ width: "700px", height: "550px" }} // Adjust the size as desired
+        style={{ width: "650px", height: "550px" }} // Adjust the size as desired
       >
         <button
           onClick={onClose}
