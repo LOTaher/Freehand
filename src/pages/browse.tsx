@@ -1,9 +1,32 @@
 // import { prisma } from "../server/db";
 import { api } from "~/utils/api";
-import { Navbar } from "../components/Navbar";
+import { BrowseNav } from "../components/BrowseNav";
 import Illustration from "~/components/Illustration";
 import type { NextPage } from "next";
+// import { getSession } from "next-auth/react";
 // import { useSession } from "next-auth/react";
+
+{
+  /*
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getServerSideProps(context: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
+}
+*/
+}
 
 const Browse: NextPage = () => {
   const { data: illustrations, isLoading } =
@@ -11,7 +34,7 @@ const Browse: NextPage = () => {
   // const { data: session } = useSession();
   return (
     <>
-      <Navbar />
+      <BrowseNav />
       <div className="mx-auto max-w-7xl px-7 py-6">
         <h1 className="text-[40px] font-extrabold text-[#222328]">
           Illustrations
