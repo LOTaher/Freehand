@@ -1,10 +1,16 @@
+import { type FC } from "react";
+
 type ModalItemProps = {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
 };
 
-export function Modal({ open, onClose, children }: ModalItemProps) {
+const Modal: FC<ModalItemProps> = ({
+  open,
+  onClose,
+  children,
+}: ModalItemProps) => {
   return (
     <div
       onClick={onClose}
@@ -29,4 +35,6 @@ export function Modal({ open, onClose, children }: ModalItemProps) {
       </div>
     </div>
   );
-}
+};
+
+export default Modal;

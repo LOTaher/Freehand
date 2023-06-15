@@ -24,7 +24,7 @@ const Landing: NextPage = () => {
       </Head>
 
       {/* Header */}
-      <header className="mx-auto flex max-w-7xl justify-between py-5 sm:px-8">
+      <header className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
         <div className="flex items-center">
           <Link href="/">
             <Image
@@ -37,6 +37,12 @@ const Landing: NextPage = () => {
           </Link>
         </div>
         <div className="mt-4 flex items-center sm:mt-0">
+          <Link
+            href="/browse"
+            className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
+          >
+            Browse
+          </Link>
           {status === "loading" && (
             <div>
               <svg
@@ -81,7 +87,7 @@ const Landing: NextPage = () => {
                     <button
                       className="focus:outline-none"
                       onClick={() => {
-                        signOut().catch(console.log);
+                        signOut({ callbackUrl: "/" }).catch(console.log);
                       }}
                     >
                       Sign Out
@@ -96,7 +102,9 @@ const Landing: NextPage = () => {
               <button
                 className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 onClick={() => {
-                  signIn("github").catch(console.log);
+                  signIn("github", { callbackUrl: "/browse" }).catch(
+                    console.log
+                  );
                 }}
               >
                 Sign In

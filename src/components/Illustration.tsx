@@ -1,17 +1,61 @@
-import { useState } from "react";
-import { Modal } from "./Modal";
+import { useState, type FC } from "react";
+import Modal from "./Modal";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { prisma } from "~/server/db";
+import { api } from "~/utils/api";
 
 type IllustrationItemProps = {
+  id: string;
   title: string;
   src: string;
   link: string;
 };
 
-export function Illustration({ title, src, link }: IllustrationItemProps) {
+const Illustration: FC<IllustrationItemProps> = ({
+  id,
+  title,
+  src,
+  link,
+}: IllustrationItemProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
+
+  /* 
+  const handleDownload = async () => {
+    const illustration = await prisma.illustration.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (
+      (session &&
+        session.user.role === "USER" &&
+        session.user.subscription === "PRO") ||
+      (session && session.user.role === "ADMIN")
+    ) {
+      // do not decrement, just download
+      console.log(illustration?.src);
+    }
+    if (
+      session &&
+      session.user.role === "USER" &&
+      session.user.subscription === "FREE"
+    ) {
+      await prisma.user.update({
+        where: {
+          id: session.user.id,
+        },
+        data: {
+          downloads: {
+            decrement: 1,
+          },
+        },
+      });
+    }
+    console.log("Did it decrement?");
+  };
+  */
 
   return (
     <>
@@ -50,9 +94,9 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
           {session ? (
             <>
               <a
-                href={link}
-                download
                 className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                download
+                href={link}
               >
                 Download SVG
               </a>
@@ -71,4 +115,6 @@ export function Illustration({ title, src, link }: IllustrationItemProps) {
       </Modal>
     </>
   );
-}
+};
+
+export default Illustration;

@@ -11,7 +11,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { useState } from "react";
-import { Modal } from "./Modal";
+import Modal from "./Modal";
 import { UploadButton } from "@uploadthing/react";
 import toast, { Toaster } from "react-hot-toast";
 import type { OurFileRouter } from "~/server/uploadthing";
@@ -24,10 +24,9 @@ export function Navbar() {
   const { buySubscription } = useBuySubscription();
 
   return (
-    <header className="bg-gray flex w-full flex-wrap items-center justify-between border-b border-b-[#e6ebf4] px-4 py-4 sm:px-8">
+    <header className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
       <div className="flex items-center">
         <Link href="/">
-          {/*eslint-disable-next-line @next/next/no-img-element*/}
           <Image
             src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
             alt="logo"
@@ -36,20 +35,15 @@ export function Navbar() {
             width={40}
           />
         </Link>
+        <a className="px-1 text-3xl">/</a>
+        <a
+          href="/browse"
+          className="px-1 text-xl font-extrabold text-[#222328]"
+        >
+          Browse
+        </a>
       </div>
       <div className="mt-4 flex items-center sm:mt-0">
-        <Link
-          href="/about"
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900 "
-        >
-          About
-        </Link>
-        <Link
-          href="/search"
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900 "
-        >
-          Search
-        </Link>
         <button
           onClick={() => {
             buySubscription().catch(console.error);
@@ -58,12 +52,6 @@ export function Navbar() {
         >
           Plan
         </button>
-        <Link
-          href="/home"
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
-        >
-          Browse
-        </Link>
         {status === "loading" && (
           <div>
             <svg
@@ -115,7 +103,9 @@ export function Navbar() {
                   <button
                     className="focus:outline-none"
                     onClick={() => {
-                      signOut().catch(console.log);
+                      signOut({
+                        callbackUrl: "/",
+                      }).catch(console.log);
                     }}
                   >
                     Sign Out
@@ -172,7 +162,7 @@ export function Navbar() {
             <button
               className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               onClick={() => {
-                signIn("github").catch(console.log);
+                signIn("github", { callbackUrl: "/browse" }).catch(console.log);
               }}
             >
               Sign In
