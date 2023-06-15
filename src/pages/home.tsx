@@ -2,9 +2,10 @@
 import { api } from "~/utils/api";
 import { Navbar } from "../components/Navbar";
 import { Illustration } from "~/components/Illustration";
+import type { NextPage } from "next";
 // import { useSession } from "next-auth/react";
 
-export default function Main() {
+const Home: NextPage = () => {
   const { data: illustrations, isLoading } =
     api.illustrations.getAll.useQuery();
   // const { data: session } = useSession();
@@ -57,4 +58,6 @@ export default function Main() {
       </div>
     </>
   );
-}
+};
+
+export default Home;
