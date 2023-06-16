@@ -1,0 +1,21 @@
+name: 🐛 Bug Report
+description: Create a bug report to help us improve
+title: "Bug: "
+labels: ["🐛 Bug"]
+body:
+  - type: textarea
+    attributes:
+      label: Provide a Description
+      description: A clear and concise description of the bug, as well as what you expected to happen when encountering it.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduce
+      description: Describe how to reproduce your bug. Steps, code snippets, reproduction repos etc.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Additional Information
+      description: Add any other information related to the bug here, screenshots if applicable.
