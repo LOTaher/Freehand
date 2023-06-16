@@ -35,13 +35,12 @@ export function BrowseNav() {
             width={40}
           />
         </Link>
-        <a className="px-1 text-3xl">/</a>
-        <a
+        <Link
           href="/browse"
           className="px-1 text-xl font-extrabold text-[#222328]"
         >
-          Browse
-        </a>
+          / Browse
+        </Link>
       </div>
       <div className="mt-4 flex items-center sm:mt-0">
         <button

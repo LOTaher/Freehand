@@ -15,7 +15,7 @@ export function HomeNav() {
 
   return (
     <header className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
-      <div className="flex items-center">
+      <div className="flex items-center px-4 py-2">
         <Link href="/">
           <Image
             src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
