@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/require-await */
 import { createUploadthing, type FileRouter } from "uploadthing/next-legacy";
 import { prisma } from "~/server/db";
-import { api } from "~/utils/api";
 import { getServerAuthSession } from "~/server/auth";
 import type { NextApiRequest } from "next";
 import type { IncomingMessage, ServerResponse } from "http";
