@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { HomeNav } from "~/components/HomeNav";
 import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const Landing: NextPage = () => {
   const FADE_DOWN_ANIMATION_VARIANT = {
@@ -12,6 +13,10 @@ const Landing: NextPage = () => {
     hidden: { opacity: 0, y: 10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
+
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: true,
+  });
 
   return (
     <>
@@ -75,14 +80,28 @@ const Landing: NextPage = () => {
       <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
         <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
           <div className="flex items-center justify-center px-4">
-            <motion.img
-              src="https://uploadthing.com/f/2b492cf3-1abe-4f12-8ddf-e931b72fd95f_undraw_in_love_q0bn.svg"
-              alt="Placeholder"
-              className="pointer-events-none mt-2 aspect-square"
-              variants={FADE_UP_ANIMATION_VARIANT}
-              width={400}
-              height={400}
-            />
+            <motion.div
+              initial="hidden"
+              animate={"show"}
+              viewport={{ once: false }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.15,
+                  },
+                },
+              }}
+            >
+              <motion.img
+                src="https://uploadthing.com/f/2b492cf3-1abe-4f12-8ddf-e931b72fd95f_undraw_in_love_q0bn.svg"
+                alt="Placeholder"
+                className="pointer-events-none mt-2 aspect-square"
+                variants={FADE_UP_ANIMATION_VARIANT}
+                width={400}
+                height={400}
+              />
+            </motion.div>
           </div>
           <div className="flex items-center justify-center">
             <motion.div
@@ -124,14 +143,15 @@ const Landing: NextPage = () => {
         <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
           <div className="flex items-center justify-center px-4">
             <motion.div
+              ref={ref}
               initial="hidden"
-              animate={"show"}
+              animate={inView ? "show" : "hidden"}
               viewport={{ once: false }}
               variants={{
                 hidden: {},
                 show: {
                   transition: {
-                    staggerChildren: 0.15,
+                    staggerChildren: 0.3,
                   },
                 },
               }}
@@ -155,14 +175,29 @@ const Landing: NextPage = () => {
             </motion.div>
           </div>
           <div className="flex items-center justify-center">
-            <motion.img
-              src="https://uploadthing.com/f/e364008e-5e45-45e4-88ee-d47bb7e70f7a_undraw_drink_coffee_jdqb.svg"
-              alt="Placeholder"
-              className="pointer-events-none mt-2 aspect-square"
-              variants={FADE_UP_ANIMATION_VARIANT}
-              width={400}
-              height={400}
-            />
+            <motion.div
+              ref={ref}
+              initial="hidden"
+              animate={inView ? "show" : "hidden"}
+              viewport={{ once: false }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.3,
+                  },
+                },
+              }}
+            >
+              <motion.img
+                src="https://uploadthing.com/f/e364008e-5e45-45e4-88ee-d47bb7e70f7a_undraw_drink_coffee_jdqb.svg"
+                alt="Placeholder"
+                className="pointer-events-none mt-2 aspect-square"
+                variants={FADE_UP_ANIMATION_VARIANT}
+                width={400}
+                height={400}
+              />
+            </motion.div>
           </div>
         </div>
       </div>
