@@ -2,8 +2,8 @@ import { useState, type FC } from "react";
 import Modal from "./Modal";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
-import { prisma } from "~/server/db";
-import { api } from "~/utils/api";
+// import { motion } from "framer-motion";
+// import { useInView } from "react-intersection-observer";
 
 type IllustrationItemProps = {
   id: string;
@@ -21,40 +21,14 @@ const Illustration: FC<IllustrationItemProps> = ({
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
 
-  /* 
-  const handleDownload = async () => {
-    const illustration = await prisma.illustration.findUnique({
-      where: {
-        id: id,
-      },
-    });
-    if (
-      (session &&
-        session.user.role === "USER" &&
-        session.user.subscription === "PRO") ||
-      (session && session.user.role === "ADMIN")
-    ) {
-      // do not decrement, just download
-      console.log(illustration?.src);
-    }
-    if (
-      session &&
-      session.user.role === "USER" &&
-      session.user.subscription === "FREE"
-    ) {
-      await prisma.user.update({
-        where: {
-          id: session.user.id,
-        },
-        data: {
-          downloads: {
-            decrement: 1,
-          },
-        },
-      });
-    }
-    console.log("Did it decrement?");
+  /*
+  const FADE_UP_ANIMATION_VARIANT = {
+    hidden: { opacity: 0, y: 10 },
+    show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
+  const { ref: ref, inView: inView } = useInView({
+    triggerOnce: true,
+  });
   */
 
   return (
