@@ -47,7 +47,7 @@ export const illustrationRouter = createTRPCRouter({
   create: protectedProcedure
     .input(
       z.object({
-        title: z.string().min(3).max(16),
+        title: z.string().min(3).max(23),
         src: z.string().url(),
         link: z.string().url(),
       })

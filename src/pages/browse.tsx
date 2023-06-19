@@ -1,7 +1,6 @@
 // import { prisma } from "../server/db";
 import { api } from "~/utils/api";
 import { BrowseNav } from "../components/BrowseNav";
-import Illustration from "~/components/Illustration";
 import type { NextPage } from "next";
 import { motion } from "framer-motion";
 import { Footer } from "~/components/Footer";

@@ -13,7 +13,7 @@ type IllustrationItemProps = {
 };
 
 const Illustration: FC<IllustrationItemProps> = ({
-  id,
+  // id,
   title,
   src,
   link,
