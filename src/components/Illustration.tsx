@@ -46,7 +46,7 @@ const Illustration: FC<IllustrationItemProps> = ({
               />
             </div>
 
-            <div className="mt-4 inline-flex items-baseline gap-2">
+            <div className="mt-1 inline-flex items-baseline gap-2">
               <h2 className="cursor-pointer text-base font-semibold text-gray-700 sm:text-3xl md:text-xl lg:text-xl">
                 {title}
               </h2>

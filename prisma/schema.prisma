@@ -82,4 +82,6 @@ model Illustration {
   title        String
   src          String
   link         String
+
+  @@unique([created_at, id])
 }
