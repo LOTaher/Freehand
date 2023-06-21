@@ -63,4 +63,19 @@ export const illustrationRouter = createTRPCRouter({
 
       return illustration;
     }),
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const deletedIllustration = await ctx.prisma.illustration.delete({
+        where: {
+          id: input.id,
+        },
+      });
+
+      return deletedIllustration;
+    }),
 });

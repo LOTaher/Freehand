@@ -2,6 +2,8 @@ import { useState, type FC } from "react";
 import Modal from "./Modal";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
+import { api } from "~/utils/api";
+import toast, { Toaster } from "react-hot-toast";
 // import { motion } from "framer-motion";
 // import { useInView } from "react-intersection-observer";
 
@@ -13,14 +15,14 @@ type IllustrationItemProps = {
 };
 
 const Illustration: FC<IllustrationItemProps> = ({
-  // id,
+  id,
   title,
   src,
   link,
 }: IllustrationItemProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
-
+  const { mutate } = api.illustrations.delete.useMutation();
   /*
   const FADE_UP_ANIMATION_VARIANT = {
     hidden: { opacity: 0, y: 10 },
@@ -30,6 +32,14 @@ const Illustration: FC<IllustrationItemProps> = ({
     triggerOnce: true,
   });
   */
+
+  function deleteIllustration(id: string) {
+    mutate({ id: id });
+    setTimeout(() => {
+      setOpen(false);
+    }, 2000);
+    toast.success("Successfully Deleted Illustration");
+  }
 
   return (
     <>
@@ -65,28 +75,43 @@ const Illustration: FC<IllustrationItemProps> = ({
             className="pointer-events-none mb-2 aspect-square h-96 w-[80%] rounded-md"
           />
           <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
-          {session ? (
-            <>
-              <a
-                className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                download
-                href={link}
-              >
-                Download SVG
-              </a>
-            </>
-          ) : (
-            <>
-              <button
-                onClick={() => signIn("github").catch(console.log)}
-                className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign In
-              </button>
-            </>
-          )}
+          <div className="flex space-x-2">
+            {session ? (
+              <>
+                <a
+                  className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  download
+                  href={link}
+                >
+                  Download SVG
+                </a>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={() => signIn("github").catch(console.log)}
+                  className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Sign In
+                </button>
+              </>
+            )}
+            {session?.user.role === "ADMIN" ? (
+              <>
+                <button
+                  className="font-inter rounded-md bg-red-500 px-4 py-2 font-medium text-white hover:bg-red-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-700"
+                  onClick={() => deleteIllustration(id)}
+                >
+                  Delete
+                </button>
+              </>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
       </Modal>
+      <Toaster />
     </>
   );
 };
