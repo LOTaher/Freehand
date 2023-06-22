@@ -113,44 +113,42 @@ export function BrowseNav() {
               </DropdownMenuContent>
             </DropdownMenu>
             <Modal open={open} onClose={() => setOpen(false)}>
-              <div className="">
-                <h1 className="text-center text-[40px] font-extrabold">
-                  File Upload Guide
-                </h1>
-                <p className="text-center text-[20px]">
-                  The file&apos;s dimensions must be 800 x 540
-                </p>
-                {/*
-                <p className="text-center text-[15px]">
-                  width: 800 | height: 540
-                </p>
-                 */}
-                <p className="text-center text-[20px]">
-                  Make the file&apos;s name the title of the illustration
-                </p>
-                {/*
-                <p className="text-center text-[15px]">
-                  Underscores in the file name will be returned as spaces!
-                </p>
-                */}
-                <p className="pb-3 text-center text-[20px]">
-                  .SVG files only please
-                </p>
-                <UploadButton<OurFileRouter>
-                  endpoint="illustrationUpload"
-                  onClientUploadComplete={(res) => {
-                    // Do something with the response
-                    console.log("Files: ", res?.[0]?.fileUrl);
-                    setTimeout(() => {
-                      setOpen(false);
-                    }, 2000);
-                    toast.success("Upload Completed");
-                  }}
-                  onUploadError={(error: Error) => {
-                    // Do something with the error.
-                    toast.error(`ERROR! ${error.message}`);
-                  }}
-                />
+              <div>
+                {/* I am a bad frontend dev lol */}
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <br></br>
+                <div>
+                  <h1 className="text-center text-[40px] font-extrabold">
+                    File Upload Guide
+                  </h1>
+                  <p className="text-center text-[20px]">
+                    Make the file&apos;s name the title of the illustration
+                  </p>
+                  <p className="text-center text-[20px]">
+                    The name of the file must be less than 23 characters
+                  </p>
+                  <p className="pb-3 text-center text-[20px]">
+                    .SVG files only please
+                  </p>
+                  <UploadButton<OurFileRouter>
+                    endpoint="illustrationUpload"
+                    onClientUploadComplete={(res) => {
+                      // Do something with the response
+                      console.log("Files: ", res?.[0]?.fileUrl);
+                      setTimeout(() => {
+                        setOpen(false);
+                      }, 2000);
+                      toast.success("Upload Completed");
+                    }}
+                    onUploadError={(error: Error) => {
+                      // Do something with the error.
+                      toast.error(`ERROR! ${error.message}`);
+                    }}
+                  />
+                </div>
               </div>
             </Modal>
             <Toaster />
@@ -158,14 +156,12 @@ export function BrowseNav() {
         )}
         {status === "unauthenticated" && (
           <>
-            <button
+            <Link
               className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => {
-                signIn("github", { callbackUrl: "/browse" }).catch(console.log);
-              }}
+              href="/sign-in"
             >
               Sign In
-            </button>
+            </Link>
           </>
         )}
       </div>

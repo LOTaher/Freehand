@@ -89,14 +89,12 @@ export function HomeNav() {
         )}
         {status === "unauthenticated" && (
           <>
-            <button
+            <Link
               className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => {
-                signIn("github", { callbackUrl: "/browse" }).catch(console.log);
-              }}
+              href="/sign-in"
             >
               Sign In
-            </button>
+            </Link>
           </>
         )}
       </div>

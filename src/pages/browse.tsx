@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import { motion } from "framer-motion";
 import { Footer } from "~/components/Footer";
 import InfiniteIllustrationList from "~/components/InfiniteIllustrationList";
+import Head from "next/head";
 // import { getSession } from "next-auth/react";
 // import { useSession } from "next-auth/react";
 
@@ -21,6 +22,12 @@ const Browse: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title>NoNameYet • Browse</title>
+        <meta name="description" content="DESCRIPTION HERE" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <BrowseNav />
       <motion.div
         initial="hidden"

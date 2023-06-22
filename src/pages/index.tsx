@@ -4,8 +4,10 @@ import { HomeNav } from "~/components/HomeNav";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Footer } from "~/components/Footer";
+import { useRouter } from "next/router";
 
 const Landing: NextPage = () => {
+  const router = useRouter();
   const FADE_DOWN_ANIMATION_VARIANT = {
     hidden: { opacity: 0, y: -10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
@@ -16,6 +18,10 @@ const Landing: NextPage = () => {
   };
 
   const { ref: ref, inView: inView } = useInView({
+    triggerOnce: true,
+  });
+
+  const { ref: ref2, inView: inView2 } = useInView({
     triggerOnce: true,
   });
 
@@ -62,12 +68,14 @@ const Landing: NextPage = () => {
             </motion.p>
             <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
               <motion.button
+                onClick={() => router.push("/sign-in")}
                 variants={FADE_DOWN_ANIMATION_VARIANT}
                 className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Get Started
               </motion.button>
               <motion.button
+                onClick={() => router.push("/about")}
                 variants={FADE_DOWN_ANIMATION_VARIANT}
                 className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
               >
@@ -152,7 +160,7 @@ const Landing: NextPage = () => {
                 hidden: {},
                 show: {
                   transition: {
-                    staggerChildren: 0.3,
+                    staggerChildren: 0.2,
                   },
                 },
               }}
@@ -185,7 +193,7 @@ const Landing: NextPage = () => {
                 hidden: {},
                 show: {
                   transition: {
-                    staggerChildren: 0.3,
+                    staggerChildren: 0.2,
                   },
                 },
               }}
@@ -202,21 +210,42 @@ const Landing: NextPage = () => {
           </div>
         </div>
       </div>
-      <br></br>
 
       {/* Pricing Section */}
       <div className="bg-white py-12 dark:bg-gray-800">
         <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
-              Choose a Plan
-            </h2>
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
-              Select the perfect plan for your needs.
-            </p>
+            <motion.div
+              ref={ref2}
+              initial="hidden"
+              animate={inView2 ? "show" : "hidden"}
+              viewport={{ once: false }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.2,
+                  },
+                },
+              }}
+            >
+              <motion.h2
+                variants={FADE_UP_ANIMATION_VARIANT}
+                className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
+              >
+                Choose a Plan
+              </motion.h2>
+              <motion.p
+                variants={FADE_UP_ANIMATION_VARIANT}
+                className="mt-4 text-lg text-gray-500 dark:text-gray-400"
+              >
+                Select the perfect plan for your needs.
+              </motion.p>
+            </motion.div>
           </div>
+
+          {/* Free Plan */}
           <div className="mt-12 flex flex-col justify-center sm:flex-row">
-            {/* Free Plan */}
             <div className="mx-4 w-full overflow-hidden rounded-lg border bg-white shadow-md dark:bg-gray-900">
               <div className="p-6">
                 <h3 className="text-center text-2xl font-extrabold text-gray-900 dark:text-white">
@@ -232,7 +261,7 @@ const Landing: NextPage = () => {
                 </div>
                 <div className="mt-6">
                   <button className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
-                    Get Started
+                    Browse Now
                   </button>
                 </div>
               </div>
@@ -246,7 +275,7 @@ const Landing: NextPage = () => {
                 </h3>
                 <div className="mt-4">
                   <p className="text-center text-xl font-semibold text-gray-900 dark:text-white">
-                    $9.99/month
+                    $2.99/month
                   </p>
                   <p className="mt-4 text-gray-500 dark:text-gray-400">
                     Access to the full collection of illustrations
