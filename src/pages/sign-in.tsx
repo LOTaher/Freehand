@@ -3,6 +3,7 @@ import { SignInNav } from "~/components/SignInNav";
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { GithubIcon } from "~/components/Icons";
 
 const SignIn: NextPage = () => {
   const { data: session } = useSession();
@@ -38,8 +39,11 @@ const SignIn: NextPage = () => {
             onClick={() => {
               signIn("github", { callbackUrl: "/browse" }).catch(console.log);
             }}
-            className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
+            className="mt-4 inline-flex rounded-md bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
           >
+            <div className="pr-2 pt-1">
+              <GithubIcon />
+            </div>{" "}
             Continue with Github
           </button>
         )}
