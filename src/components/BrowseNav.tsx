@@ -38,7 +38,7 @@ export function BrowseNav() {
   }, []);
 
   const headerClass = `mx-auto flex max-w-7xl justify-between py-4 sm:px-8 ${
-    isScrolled ? "bg-white bg-opacity-60" : ""
+    isScrolled ? "bg-white bg-opacity-50" : ""
   } ${isScrolled ? "sticky top-0 z-50" : ""}`;
 
   return (
