@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -9,12 +9,31 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import { useEffect, useState } from "react";
 
 export function HomeNav() {
   const { data: session, status } = useSession();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerClass = `mx-auto flex max-w-7xl justify-between py-4 sm:px-8 ${
+    isScrolled ? "bg-white bg-opacity-60" : ""
+  } ${isScrolled ? "sticky top-0 z-50" : ""}`;
 
   return (
-    <header className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
+    <header className={headerClass}>
       <div className="flex items-center px-4 py-2">
         <Link href="/">
           <Image

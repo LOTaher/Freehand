@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import {
   DropdownMenu,
@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
 import { UploadButton } from "@uploadthing/react";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,12 +19,30 @@ import "@uploadthing/react/styles.css";
 
 export function BrowseNav() {
   const [open, setOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { data: session, status } = useSession();
 
   const { buySubscription } = useBuySubscription();
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerClass = `mx-auto flex max-w-7xl justify-between py-4 sm:px-8 ${
+    isScrolled ? "bg-white bg-opacity-60" : ""
+  } ${isScrolled ? "sticky top-0 z-50" : ""}`;
+
   return (
-    <header className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
+    <header className={headerClass}>
       <div className="flex items-center px-4 py-2">
         <Link href="/">
           <Image
