@@ -1,11 +1,11 @@
 import { useState, type FC } from "react";
 import Modal from "./Modal";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { api } from "~/utils/api";
 import toast, { Toaster } from "react-hot-toast";
-// import { motion } from "framer-motion";
-// import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/router";
+import { Badge } from "components/ui/badge";
 
 type IllustrationItemProps = {
   id: string;
@@ -22,19 +22,32 @@ const Illustration: FC<IllustrationItemProps> = ({
 }: IllustrationItemProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
-  const { mutate } = api.illustrations.delete.useMutation();
-  /*
-  const FADE_UP_ANIMATION_VARIANT = {
-    hidden: { opacity: 0, y: 10 },
-    show: { opacity: 1, y: 0, transition: { type: "spring" } },
-  };
-  const { ref: ref, inView: inView } = useInView({
-    triggerOnce: true,
-  });
-  */
+  const { mutate: deleteMutation } = api.illustrations.delete.useMutation();
+  const { mutate: decrementMutation } =
+    api.illustrations.decrement.useMutation();
+  const router = useRouter();
+
+  function handleDownload() {
+    if (session?.user.subscription === "PRO") {
+      setOpen(false);
+      location.reload();
+      // window.open(link, "_blank");
+    }
+
+    if (session?.user.subscription === "FREE" && session?.user.downloads > 0) {
+      decrementMutation({ id: session?.user.id });
+      setOpen(false);
+      location.reload();
+      // window.open(link, "_blank");
+    }
+
+    if (session?.user.subscription === "FREE" && session?.user.downloads <= 0) {
+      toast.error("No Free Downloads Remaining");
+    }
+  }
 
   function deleteIllustration(id: string) {
-    mutate({ id: id });
+    deleteMutation({ id: id });
     setTimeout(() => {
       setOpen(false);
     }, 2000);
@@ -56,40 +69,65 @@ const Illustration: FC<IllustrationItemProps> = ({
               />
             </div>
 
-            <div className="mt-1 inline-flex items-baseline gap-2">
+            <div className="inline-flex items-baseline gap-2">
               <h2 className="cursor-pointer text-base font-semibold text-gray-700 sm:text-3xl md:text-xl lg:text-xl">
                 {title}
               </h2>
             </div>
           </div>
         </a>
+        <Toaster />
       </div>
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col items-center p-2">
+          {session?.user.subscription === "FREE" &&
+            session?.user.downloads > 0 && (
+              <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                {session?.user.downloads} Free Downloads Remaining
+              </Badge>
+            )}
+          {session?.user.subscription === "FREE" &&
+            session?.user.downloads <= 0 && (
+              <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                No Free Downloads Remaining
+              </Badge>
+            )}
           <Image
             src={src}
             width={100}
             height={100}
             alt={title}
-            className="pointer-events-none mb-2 aspect-square h-96 w-[80%] rounded-md"
+            className="pointer-events-none mb-1 mt-1 aspect-square h-96 w-[80%] rounded-md"
           />
           <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
           <div className="flex space-x-2">
             {session ? (
               <>
-                <a
-                  className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  download
-                  href={link}
-                >
-                  Download SVG
-                </a>
+                {(session?.user.subscription === "PRO" ||
+                  (session.user.subscription === "FREE" &&
+                    session.user.downloads > 0)) && (
+                  <button
+                    className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    onClick={() => handleDownload()}
+                  >
+                    Download SVG
+                  </button>
+                )}
+                {session?.user.subscription === "FREE" &&
+                  session?.user.downloads <= 0 && (
+                    <button
+                      className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => router.push("/pricing")}
+                    >
+                      Upgrade to PRO
+                    </button>
+                  )}
               </>
             ) : (
               <>
                 <button
-                  onClick={() => signIn("github").catch(console.log)}
+                  onClick={() => router.push("/sign-in")}
                   className="font-inter rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign In
@@ -111,7 +149,6 @@ const Illustration: FC<IllustrationItemProps> = ({
           </div>
         </div>
       </Modal>
-      <Toaster />
     </>
   );
 };

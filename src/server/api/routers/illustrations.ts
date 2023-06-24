@@ -78,4 +78,24 @@ export const illustrationRouter = createTRPCRouter({
 
       return deletedIllustration;
     }),
+  decrement: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const downloads = await ctx.prisma.user.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          downloads: {
+            decrement: 1,
+          },
+        },
+      });
+
+      return downloads;
+    }),
 });
