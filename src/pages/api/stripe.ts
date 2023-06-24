@@ -50,6 +50,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           data: {
             subscription: "PRO",
+            downloads: 999,
           },
         });
         break;
@@ -68,6 +69,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           data: {
             subscription: "PRO",
+            downloads: 999,
           },
         });
         break;
@@ -86,6 +88,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           data: {
             subscription: "FREE",
+            downloads: 5,
           },
         });
         break;
