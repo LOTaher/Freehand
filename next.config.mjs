@@ -16,6 +16,7 @@ const config = {
       "bit.ly",
       "cdn.discordapp.com",
       "uploadthing.com",
+      "lh3.googleusercontent.com",
     ],
   },
 

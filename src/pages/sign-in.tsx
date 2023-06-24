@@ -3,7 +3,7 @@ import { SignInNav } from "~/components/SignInNav";
 import Head from "next/head";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { GithubIcon } from "~/components/Icons";
+import { GithubIcon, GoogleIcon } from "~/components/Icons";
 
 const SignIn: NextPage = () => {
   const { data: session } = useSession();
@@ -35,17 +35,34 @@ const SignIn: NextPage = () => {
         <p className="mt-2 text-lg text-gray-500">To continue to NoNameYet</p>
         {session && <div></div>}
         {!session && (
-          <button
-            onClick={() => {
-              signIn("github", { callbackUrl: "/browse" }).catch(console.log);
-            }}
-            className="mt-4 inline-flex rounded-md bg-blue-500 px-4 py-2 text-lg font-medium text-white hover:bg-blue-600"
-          >
-            <div className="pr-2 pt-1">
-              <GithubIcon />
-            </div>{" "}
-            Continue with Github
-          </button>
+          <div>
+            <button
+              onClick={() => {
+                signIn("github", { callbackUrl: "/browse" }).catch(console.log);
+              }}
+              className="mt-4 inline-flex rounded-md bg-[#171515] px-4 py-2 text-lg font-medium text-white hover:bg-[#211e1e]"
+            >
+              <div className="pr-2 pt-1">
+                <GithubIcon />
+              </div>{" "}
+              Continue with Github
+            </button>
+            <button>
+              <div
+                className="mt-4 inline-flex rounded-md bg-[#bf4337] px-4 py-2 text-lg font-medium text-white hover:bg-[#d14c3b]"
+                onClick={() => {
+                  signIn("google", { callbackUrl: "/browse" }).catch(
+                    console.log
+                  );
+                }}
+              >
+                <div className="pr-2 pt-1">
+                  <GoogleIcon />
+                </div>{" "}
+                Continue with Google
+              </div>
+            </button>
+          </div>
         )}
         <p className="mt-2 pt-2 text-sm text-gray-500">
           By signing in, you agree to our{" "}
