@@ -1,4 +1,9 @@
-import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+  adminProcedure,
+} from "../trpc";
 import { z } from "zod";
 
 export const illustrationRouter = createTRPCRouter({
@@ -44,7 +49,7 @@ export const illustrationRouter = createTRPCRouter({
         nextCursor,
       };
     }),
-  create: protectedProcedure
+  create: adminProcedure
     .input(
       z.object({
         title: z.string().min(3).max(23),
@@ -63,7 +68,7 @@ export const illustrationRouter = createTRPCRouter({
 
       return illustration;
     }),
-  delete: protectedProcedure
+  delete: adminProcedure
     .input(
       z.object({
         id: z.string(),
@@ -78,7 +83,7 @@ export const illustrationRouter = createTRPCRouter({
 
       return deletedIllustration;
     }),
-  decrement: publicProcedure
+  decrement: protectedProcedure
     .input(
       z.object({
         id: z.string(),
