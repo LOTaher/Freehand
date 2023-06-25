@@ -15,7 +15,6 @@ export const config = {
 };
 
 const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("here");
   if (req.method === "POST") {
     const buf = await buffer(req);
     const sig = req.headers["stripe-signature"] as string;
@@ -36,7 +35,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     switch (event.type) {
-      case "checkout.session.completed":
+      case "payment_intent.succeeded":
         const checkoutSessionCompleted = event.data.object as {
           id: string;
           metadata: {
