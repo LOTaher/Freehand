@@ -35,7 +35,7 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     switch (event.type) {
-      case "payment_intent.succeeded":
+      case "checkout.session.completed":
         const checkoutSessionCompleted = event.data.object as {
           id: string;
           metadata: {
@@ -49,45 +49,6 @@ const webhook = async (req: NextApiRequest, res: NextApiResponse) => {
           },
           data: {
             subscription: "PRO",
-            downloads: 999,
-          },
-        });
-        break;
-
-      case "subscription.payment_succeeded":
-        const subscriptionPaymentSucceeded = event.data.object as {
-          id: string;
-          metadata: {
-            userId: string;
-          };
-        };
-
-        await prisma.user.update({
-          where: {
-            id: subscriptionPaymentSucceeded.metadata.userId,
-          },
-          data: {
-            subscription: "PRO",
-            downloads: 999,
-          },
-        });
-        break;
-
-      case "subscription.payment_failed":
-        const subscriptionPaymentFailed = event.data.object as {
-          id: string;
-          metadata: {
-            userId: string;
-          };
-        };
-
-        await prisma.user.update({
-          where: {
-            id: subscriptionPaymentFailed.metadata.userId,
-          },
-          data: {
-            subscription: "FREE",
-            downloads: 5,
           },
         });
         break;
