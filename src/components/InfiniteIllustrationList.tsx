@@ -36,7 +36,9 @@ const InfiniteIllustrationList: FC<InfiniteIllustrationListProps> = ({
     );
   }
   if (illustrations == null || illustrations.length === 0) {
-    return <h1>No Illustrations</h1>;
+    return (
+      <h1 className="text-center text-xl font-semibold">No Illustrations</h1>
+    );
   }
 
   return (

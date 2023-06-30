@@ -5,9 +5,11 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Footer } from "~/components/Footer";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 const Landing: NextPage = () => {
   const router = useRouter();
+  const { data: session } = useSession();
   const FADE_DOWN_ANIMATION_VARIANT = {
     hidden: { opacity: 0, y: -10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
@@ -67,13 +69,23 @@ const Landing: NextPage = () => {
               project.
             </motion.p>
             <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
-              <motion.button
-                onClick={() => router.push("/sign-in")}
-                variants={FADE_DOWN_ANIMATION_VARIANT}
-                className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Get Started
-              </motion.button>
+              {session ? (
+                <motion.button
+                  onClick={() => router.push("/browse")}
+                  variants={FADE_DOWN_ANIMATION_VARIANT}
+                  className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Get Started
+                </motion.button>
+              ) : (
+                <motion.button
+                  onClick={() => router.push("/sign-in")}
+                  variants={FADE_DOWN_ANIMATION_VARIANT}
+                  className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Get Started
+                </motion.button>
+              )}
               <motion.button
                 onClick={() => router.push("/about")}
                 variants={FADE_DOWN_ANIMATION_VARIANT}
@@ -260,9 +272,21 @@ const Landing: NextPage = () => {
                   </p>
                 </div>
                 <div className="mt-6">
-                  <button className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
-                    Browse Now
-                  </button>
+                  {session ? (
+                    <button
+                      className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                      onClick={() => router.push("/browse")}
+                    >
+                      Browse Now
+                    </button>
+                  ) : (
+                    <button
+                      className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                      onClick={() => router.push("/sign-in")}
+                    >
+                      Browse Now
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
