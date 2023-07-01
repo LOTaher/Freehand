@@ -8,6 +8,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
+import { Input } from "../../components/ui/input";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { useEffect, useState } from "react";
 import Modal from "./Modal";
@@ -15,11 +16,35 @@ import { UploadButton } from "@uploadthing/react";
 import toast, { Toaster } from "react-hot-toast";
 import type { OurFileRouter } from "~/server/uploadthing";
 import "@uploadthing/react/styles.css";
+import { api } from "~/utils/api";
 
 export function BrowseNav() {
   const [open, setOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [title, setTitle] = useState("");
+
   const { data: session, status } = useSession();
+
+  const ctx = api.useContext();
+
+  const { mutate: createIllustration, isLoading: creationLoading } =
+    api.illustrations.create.useMutation({
+      onSuccess: () => {
+        setTitle("");
+        void ctx.illustrations.infiniteFeed.invalidate();
+        toast.success("Successfully Uploaded Illustration");
+        setOpen(false);
+      },
+      onError: (error) => {
+        const errorMessage = error.data?.zodError?.fieldErrors.content;
+
+        if (errorMessage && errorMessage[0]) {
+          toast.error(errorMessage[0]);
+        } else {
+          toast.error("Unable to Upload Illustration");
+        }
+      },
+    });
 
   const { buySubscription } = useBuySubscription();
 
@@ -155,21 +180,39 @@ export function BrowseNav() {
                   <p className="pb-3 text-center text-[20px]">
                     .SVG files only please
                   </p>
-                  <UploadButton<OurFileRouter>
-                    endpoint="illustrationUpload"
-                    onClientUploadComplete={(res) => {
-                      // Do something with the response
-                      console.log("Files: ", res?.[0]?.fileUrl);
-                      setTimeout(() => {
-                        setOpen(false);
-                      }, 2000);
-                      toast.success("Upload Completed");
-                    }}
-                    onUploadError={(error: Error) => {
-                      // Do something with the error.
-                      toast.error(`ERROR! ${error.message}`);
-                    }}
-                  />
+                  <div className="flex items-center justify-center">
+                    <div className="flex w-full max-w-sm items-center space-x-2 pr-4 ">
+                      <Input
+                        onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        placeholder="Illustration Title"
+                        className="w-30 mx-auto mb-3 mt-2"
+                        disabled={creationLoading}
+                      />
+                      <div className="pt-4">
+                        <UploadButton<OurFileRouter>
+                          endpoint="illustrationUpload"
+                          onClientUploadComplete={(res) => {
+                            console.log("Files: ", res?.[0]?.fileUrl);
+                            if (res?.[0]?.fileUrl) {
+                              // const filename = file.name.substring(0, file.name.lastIndexOf("."));
+                              createIllustration({
+                                src: res?.[0]?.fileUrl,
+                                title: title,
+                              });
+                            } else {
+                              toast.error("ERROR! No file uploaded");
+                            }
+                            // Do something with the response
+                          }}
+                          onUploadError={(error: Error) => {
+                            // Do something with the error.
+                            toast.error(`ERROR! ${error.message}`);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </Modal>

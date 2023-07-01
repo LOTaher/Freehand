@@ -32,13 +32,17 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ file }) => {
       console.log("Upload complete");
 
-      const filename = file.name.substring(0, file.name.lastIndexOf("."));
-      await prisma.illustration.create({
-        data: {
-          title: filename.replace(/_/g, " "),
-          src: file.url,
-        },
-      });
+      if (file.name.length > 23) {
+        throw new Error("File name is too long");
+      }
+
+      // const filename = file.name.substring(0, file.name.lastIndexOf("."));
+      // await prisma.illustration.create({
+      //   data: {
+      //     title: filename.replace(/_/g, " "),
+      //     src: file.url,
+      //   },
+      // });
     }),
 } satisfies FileRouter;
 
