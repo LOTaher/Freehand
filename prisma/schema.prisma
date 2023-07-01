@@ -81,7 +81,6 @@ model Illustration {
   created_at   DateTime? @default(now()) @db.Timestamptz(6)
   title        String   @db.VarChar(23)
   src          String
-  link         String
 
   @@unique([created_at, id])
 }

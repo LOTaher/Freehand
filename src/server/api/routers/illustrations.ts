@@ -23,7 +23,6 @@ export const illustrationRouter = createTRPCRouter({
           id: true,
           title: true,
           src: true,
-          link: true,
           created_at: true,
         },
       });
@@ -43,7 +42,6 @@ export const illustrationRouter = createTRPCRouter({
             id: illustration.id,
             title: illustration.title,
             src: illustration.src,
-            link: illustration.link,
           };
         }),
         nextCursor,
@@ -54,7 +52,6 @@ export const illustrationRouter = createTRPCRouter({
       z.object({
         title: z.string().min(3).max(23),
         src: z.string().url(),
-        link: z.string().url(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -62,7 +59,6 @@ export const illustrationRouter = createTRPCRouter({
         data: {
           title: input.title,
           src: input.src,
-          link: input.link,
         },
       });
 

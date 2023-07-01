@@ -11,14 +11,12 @@ type IllustrationItemProps = {
   id: string;
   title: string;
   src: string;
-  link: string;
 };
 
 const Illustration: FC<IllustrationItemProps> = ({
   id,
   title,
   src,
-  link,
 }: IllustrationItemProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
@@ -27,18 +25,45 @@ const Illustration: FC<IllustrationItemProps> = ({
     api.illustrations.decrement.useMutation();
   const router = useRouter();
 
+  function download(src: string, title: string) {
+    // Using the Fetch API to get the SVG file
+    void fetch(src)
+      .then((response) => response.blob())
+      .then((blob) => {
+        // Creating a temporary URL for the SVG file blob
+        const url = URL.createObjectURL(blob);
+
+        // Creating a link element
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = title;
+
+        // Appending the link to the document body and triggering the download
+        document.body.appendChild(link);
+        link.click();
+
+        // Cleanup: removing the link and revoking the temporary URL
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      });
+  }
+
   function handleDownload() {
     if (session?.user.subscription === "PRO") {
+      download(src, title);
       setOpen(false);
-      location.reload();
-      // window.open(link, "_blank");
+      setTimeout(() => {
+        window.location.reload(); // Refresh the window after 1 second
+      }, 300);
     }
 
     if (session?.user.subscription === "FREE" && session?.user.downloads > 0) {
       decrementMutation({ id: session?.user.id });
+      download(src, title);
       setOpen(false);
-      location.reload();
-      // window.open(link, "_blank");
+      setTimeout(() => {
+        window.location.reload(); // Refresh the window after 1 second
+      }, 300);
     }
 
     if (session?.user.subscription === "FREE" && session?.user.downloads <= 0) {

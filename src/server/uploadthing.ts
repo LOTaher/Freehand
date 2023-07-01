@@ -37,7 +37,6 @@ export const ourFileRouter = {
         data: {
           title: filename.replace(/_/g, " "),
           src: file.url,
-          link: file.url,
         },
       });
     }),
