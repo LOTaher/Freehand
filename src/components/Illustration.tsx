@@ -37,7 +37,23 @@ const Illustration: FC<IllustrationItemProps> = ({
     },
   });
   const { mutate: decrementMutation, isLoading: isDecrementing } =
-    api.illustrations.decrement.useMutation();
+    api.illustrations.decrement.useMutation({
+      onSuccess: () => {
+        void ctx.user.getUserDownloads.invalidate();
+      },
+      onError: (error) => {
+        const errorMessage = error.data?.zodError?.fieldErrors.content;
+
+        if (errorMessage && errorMessage[0]) {
+          toast.error(errorMessage[0]);
+        } else {
+          toast.error("Unable to Decrement Downloads");
+        }
+      },
+    });
+  const { data: downloadCount } = api.user.getUserDownloads.useQuery({
+    id: session?.user.id || "",
+  });
   const router = useRouter();
 
   function download(src: string, title: string) {
@@ -67,18 +83,12 @@ const Illustration: FC<IllustrationItemProps> = ({
     if (session?.user.subscription === "PRO") {
       download(src, title);
       setOpen(false);
-      setTimeout(() => {
-        window.location.reload(); // Refresh the window after 1 second
-      }, 300);
     }
 
     if (session?.user.subscription === "FREE" && session?.user.downloads > 0) {
       decrementMutation({ id: session?.user.id });
       download(src, title);
       setOpen(false);
-      setTimeout(() => {
-        window.location.reload(); // Refresh the window after 1 second
-      }, 300);
     }
 
     if (session?.user.subscription === "FREE" && session?.user.downloads <= 0) {
@@ -122,7 +132,7 @@ const Illustration: FC<IllustrationItemProps> = ({
           {session?.user.subscription === "FREE" &&
             session?.user.downloads > 0 && (
               <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
-                {session?.user.downloads} Free Downloads Remaining
+                {downloadCount?.downloads} Free Downloads Remaining
               </Badge>
             )}
           {session?.user.subscription === "FREE" &&
