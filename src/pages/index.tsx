@@ -148,12 +148,10 @@ const Landing: NextPage = () => {
                 variants={FADE_UP_ANIMATION_VARIANT}
                 className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400"
               >
-                You are free to use the illustrations on your website for any
-                project, whether commercial or personal, without attribution or
-                any costs. However, please refrain from replicating the original
-                source or distributing the illustrations. Integration creation
-                for the illustrations is also not permitted. Enjoy this truly
-                open license!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Et odit
+                nostrum, cupiditate inventore labore suscipit id iure molestias
+                maxime ullam perferendis quam praesentium, eligendi consectetur
+                voluptas deserunt quasi assumenda mollitia.
               </motion.p>
             </motion.div>
           </div>
