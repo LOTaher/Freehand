@@ -3,7 +3,7 @@ import Modal from "./Modal";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { api } from "~/utils/api";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { Badge } from "components/ui/badge";
 
@@ -20,8 +20,23 @@ const Illustration: FC<IllustrationItemProps> = ({
 }: IllustrationItemProps) => {
   const [open, setOpen] = useState(false);
   const { data: session } = useSession();
-  const { mutate: deleteMutation } = api.illustrations.delete.useMutation();
-  const { mutate: decrementMutation } =
+  const ctx = api.useContext();
+  const { mutate: deleteMutation } = api.illustrations.delete.useMutation({
+    onSuccess: () => {
+      void ctx.illustrations.infiniteFeed.invalidate();
+      toast.success("Successfully Deleted Illustration");
+    },
+    onError: (error) => {
+      const errorMessage = error.data?.zodError?.fieldErrors.content;
+
+      if (errorMessage && errorMessage[0]) {
+        toast.error(errorMessage[0]);
+      } else {
+        toast.error("Unable to Delete Illustration");
+      }
+    },
+  });
+  const { mutate: decrementMutation, isLoading: isDecrementing } =
     api.illustrations.decrement.useMutation();
   const router = useRouter();
 
@@ -76,7 +91,6 @@ const Illustration: FC<IllustrationItemProps> = ({
     setTimeout(() => {
       setOpen(false);
     }, 2000);
-    toast.success("Successfully Deleted Illustration");
   }
 
   return (
@@ -101,7 +115,6 @@ const Illustration: FC<IllustrationItemProps> = ({
             </div>
           </div>
         </a>
-        <Toaster />
       </div>
 
       <Modal open={open} onClose={() => setOpen(false)}>
@@ -135,6 +148,7 @@ const Illustration: FC<IllustrationItemProps> = ({
                   <button
                     className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => handleDownload()}
+                    disabled={isDecrementing}
                   >
                     Download SVG
                   </button>
