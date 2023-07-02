@@ -39,7 +39,7 @@ const Illustration: FC<IllustrationItemProps> = ({
   const { mutate: decrementMutation, isLoading: isDecrementing } =
     api.illustrations.decrement.useMutation({
       onSuccess: () => {
-        void ctx.user.getUserDownloads.invalidate();
+        void ctx.user.getDownloads.invalidate();
       },
       onError: (error) => {
         const errorMessage = error.data?.zodError?.fieldErrors.content;
@@ -51,10 +51,12 @@ const Illustration: FC<IllustrationItemProps> = ({
         }
       },
     });
-  const { data: downloadCount } = api.user.getUserDownloads.useQuery({
+
+  const router = useRouter();
+
+  const { data: user } = api.user.getDownloads.useQuery({
     id: session?.user.id || "",
   });
-  const router = useRouter();
 
   function download(src: string, title: string) {
     // Using the Fetch API to get the SVG file
@@ -129,18 +131,22 @@ const Illustration: FC<IllustrationItemProps> = ({
 
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="flex flex-col items-center p-2">
-          {session?.user.subscription === "FREE" &&
-            session?.user.downloads > 0 && (
-              <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
-                {downloadCount?.downloads} Free Downloads Remaining
-              </Badge>
-            )}
-          {session?.user.subscription === "FREE" &&
-            session?.user.downloads <= 0 && (
-              <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
-                No Free Downloads Remaining
-              </Badge>
-            )}
+          {session && user ? (
+            <>
+              {session.user.subscription === "FREE" && user.downloads > 0 && (
+                <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                  {user.downloads} Free Downloads Remaining
+                </Badge>
+              )}
+              {session.user.subscription === "FREE" && user.downloads <= 0 && (
+                <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                  No Free Downloads Remaining
+                </Badge>
+              )}
+            </>
+          ) : (
+            <div></div>
+          )}
           <Image
             src={src}
             width={100}
@@ -150,11 +156,11 @@ const Illustration: FC<IllustrationItemProps> = ({
           />
           <h2 className="mb-1 py-1 text-2xl font-bold">{title}</h2>
           <div className="flex space-x-2">
-            {session ? (
+            {session && user ? (
               <>
                 {(session?.user.subscription === "PRO" ||
                   (session.user.subscription === "FREE" &&
-                    session.user.downloads > 0)) && (
+                    user.downloads > 0)) && (
                   <button
                     className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => handleDownload()}
@@ -164,7 +170,7 @@ const Illustration: FC<IllustrationItemProps> = ({
                   </button>
                 )}
                 {session?.user.subscription === "FREE" &&
-                  session?.user.downloads <= 0 && (
+                  user.downloads <= 0 && (
                     <button
                       className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => router.push("/pricing")}
