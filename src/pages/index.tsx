@@ -2,10 +2,11 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { HomeNav } from "~/components/HomeNav";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { Footer } from "~/components/Footer";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
+import { CheckmarkIcon } from "~/components/Icons";
 
 const Landing: NextPage = () => {
   const router = useRouter();
@@ -18,14 +19,6 @@ const Landing: NextPage = () => {
     hidden: { opacity: 0, y: 10 },
     show: { opacity: 1, y: 0, transition: { type: "spring" } },
   };
-
-  const { ref: ref, inView: inView } = useInView({
-    triggerOnce: true,
-  });
-
-  const { ref: ref2, inView: inView2 } = useInView({
-    triggerOnce: true,
-  });
 
   return (
     <>
@@ -160,153 +153,75 @@ const Landing: NextPage = () => {
 
       <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
         <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
-          <div className="flex items-center justify-center px-4">
-            <motion.div
-              ref={ref}
-              initial="hidden"
-              animate={inView ? "show" : "hidden"}
-              viewport={{ once: false }}
-              variants={{
-                hidden: {},
-                show: {
-                  transition: {
-                    staggerChildren: 0.2,
-                  },
-                },
-              }}
-            >
-              <motion.h1
-                variants={FADE_UP_ANIMATION_VARIANT}
-                className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
-              >
-                Lorem
-              </motion.h1>
-              <motion.p
-                variants={FADE_UP_ANIMATION_VARIANT}
-                className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400"
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                a nunc eget odio ultricies aliquet. Nulla facilisi. Donec
-                vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
-                augue, eget aliquam nisl nunc eget odio. Nulla facilisi. Donec
-                vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
-              </motion.p>
-            </motion.div>
+          <div className="flex flex-col content-start items-center justify-center px-4">
+            <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+              Lorem
+            </h1>
+            <p className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
+              nunc eget odio ultricies aliquet. Nulla facilisi. Donec
+              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
+              augue, eget aliquam nisl nunc eget odio. Nulla facilisi. Donec
+              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
+            </p>
           </div>
           <div className="flex items-center justify-center">
-            <motion.div
-              ref={ref}
-              initial="hidden"
-              animate={inView ? "show" : "hidden"}
-              viewport={{ once: false }}
-              variants={{
-                hidden: {},
-                show: {
-                  transition: {
-                    staggerChildren: 0.2,
-                  },
-                },
-              }}
-            >
-              <motion.img
-                src="https://uploadthing.com/f/e364008e-5e45-45e4-88ee-d47bb7e70f7a_undraw_drink_coffee_jdqb.svg"
-                alt="Placeholder"
-                className="pointer-events-none mt-2 aspect-square"
-                variants={FADE_UP_ANIMATION_VARIANT}
-                width={400}
-                height={400}
-              />
-            </motion.div>
+            <Image
+              src="https://uploadthing.com/f/e364008e-5e45-45e4-88ee-d47bb7e70f7a_undraw_drink_coffee_jdqb.svg"
+              alt="Placeholder"
+              className="pointer-events-none mt-2 aspect-square"
+              width={400}
+              height={400}
+            />
           </div>
         </div>
       </div>
 
       {/* Pricing Section */}
-      <div className="bg-white py-12 dark:bg-gray-800">
-        <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
+      <div className="bg-white py-14">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <motion.div
-              ref={ref2}
-              initial="hidden"
-              animate={inView2 ? "show" : "hidden"}
-              viewport={{ once: false }}
-              variants={{
-                hidden: {},
-                show: {
-                  transition: {
-                    staggerChildren: 0.2,
-                  },
-                },
-              }}
-            >
-              <motion.h2
-                variants={FADE_UP_ANIMATION_VARIANT}
-                className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl"
-              >
-                Choose a Plan
-              </motion.h2>
-              <motion.p
-                variants={FADE_UP_ANIMATION_VARIANT}
-                className="mt-4 text-lg text-gray-500 dark:text-gray-400"
-              >
-                Select the perfect plan for your needs.
-              </motion.p>
-            </motion.div>
+            <h2 className="text-4xl font-extrabold text-gray-900">
+              Unlock Full Access
+            </h2>
+            <p className="mt-4 text-lg font-normal text-gray-600">
+              Support us and get complete access to our collection.
+            </p>
           </div>
 
-          {/* Free Plan */}
-          <div className="mt-12 flex flex-col justify-center sm:flex-row">
-            <div className="mx-4 w-full overflow-hidden rounded-lg border bg-white shadow-md dark:bg-gray-900">
+          {/* One-Time Payment */}
+          <div className="mt-12 flex items-center justify-center">
+            <div className="max-w-md overflow-hidden rounded-lg bg-white shadow-md">
               <div className="p-6">
-                <h3 className="text-center text-2xl font-extrabold text-gray-900 dark:text-white">
-                  Free Plan
+                <h3 className="text-center text-2xl font-bold text-gray-900">
+                  One-Time Payment
                 </h3>
-                <div className="mt-4">
-                  <p className="text-center text-xl font-semibold text-gray-900 dark:text-white">
-                    $0/month
-                  </p>
-                  <p className="mt-4 text-gray-500 dark:text-gray-400">
-                    Access to a limited set of illustrations
+                <div className="mt-4 flex items-center">
+                  <CheckmarkIcon />
+                  <p className="ml-2 text-gray-600">
+                    Full access to the entire collection of illustrations.
                   </p>
                 </div>
-                <div className="mt-6">
+                <div className="mt-4 flex items-center">
+                  <CheckmarkIcon />
+                  <p className="ml-2 text-gray-600">Support our team.</p>
+                </div>
+                <div className="mt-8 text-center">
                   {session ? (
                     <button
-                      className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                      className="inline-block rounded-md bg-[#6469ff] px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => router.push("/browse")}
                     >
-                      Browse Now
+                      Get it Now
                     </button>
                   ) : (
                     <button
-                      className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
+                      className="inline-block rounded-md bg-[#6469ff] px-6 py-3 text-lg font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                       onClick={() => router.push("/sign-in")}
                     >
-                      Browse Now
+                      Get it Now
                     </button>
                   )}
-                </div>
-              </div>
-            </div>
-
-            {/* Pro Plan */}
-            <div className="mx-4 mt-8 w-full overflow-hidden rounded-lg border bg-white shadow-md dark:bg-gray-900 sm:mt-0">
-              <div className="p-6">
-                <h3 className="text-center text-2xl font-extrabold text-gray-900 dark:text-white">
-                  Pro Plan
-                </h3>
-                <div className="mt-4">
-                  <p className="text-center text-xl font-semibold text-gray-900 dark:text-white">
-                    $2.99/month
-                  </p>
-                  <p className="mt-4 text-gray-500 dark:text-gray-400">
-                    Access to the full collection of illustrations
-                  </p>
-                </div>
-                <div className="mt-6">
-                  <button className="w-full rounded-lg bg-indigo-600 px-6 py-2 text-base font-medium text-white shadow-md hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
-                    Get Started
-                  </button>
                 </div>
               </div>
             </div>

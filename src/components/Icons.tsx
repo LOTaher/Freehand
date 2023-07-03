@@ -58,8 +58,8 @@ export function CheckmarkIcon() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 48 48"
-      width="48px"
-      height="48px"
+      width="20px"
+      height="20px"
     >
       <path
         fill="#43A047"
