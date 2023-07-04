@@ -89,17 +89,17 @@ function BrowseNav() {
           / Browse
         </Link>
       </div>
-      {session && (
-        <button
-          onClick={() => {
-            buySubscription().catch(console.error);
-          }}
-          className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
-        >
-          Plan
-        </button>
-      )}
       <div className="mt-4 flex items-center sm:mt-0">
+        {session && (
+          <button
+            onClick={() => {
+              buySubscription().catch(console.error);
+            }}
+            className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
+          >
+            Plan
+          </button>
+        )}
         {status === "loading" && (
           <div>
             <svg
