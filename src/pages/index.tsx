@@ -334,14 +334,24 @@ const Landing: NextPage = () => {
                   <p className="ml-2 text-gray-600">Support our team.</p>
                 </div>
                 <div className="mt-8 text-center">
-                  {session ? (
+                  {session && session.user.subscription === "FREE" && (
                     <button
                       className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => router.push("/pricing")}
                     >
                       Get it Now
                     </button>
-                  ) : (
+                  )}
+                  {session && session.user.subscription === "PRO" && (
+                    <button
+                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => router.push("/pricing")}
+                      disabled={true}
+                    >
+                      Purchased
+                    </button>
+                  )}
+                  {!session && (
                     <button
                       className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => router.push("/sign-in")}
