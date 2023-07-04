@@ -337,7 +337,7 @@ const Landing: NextPage = () => {
                   {session ? (
                     <button
                       className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => router.push("/browse")}
+                      onClick={() => router.push("/pricing")}
                     >
                       Get it Now
                     </button>

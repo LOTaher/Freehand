@@ -175,7 +175,7 @@ const Illustration: FC<IllustrationItemProps> = ({
                       className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => router.push("/pricing")}
                     >
-                      Upgrade to PRO
+                      Buy Full Access
                     </button>
                   )}
               </>
