@@ -89,7 +89,7 @@ function BrowseNav() {
           / Browse
         </Link>
       </div>
-      <div className="mt-4 flex items-center sm:mt-0">
+      {session && (
         <button
           onClick={() => {
             buySubscription().catch(console.error);
@@ -98,6 +98,8 @@ function BrowseNav() {
         >
           Plan
         </button>
+      )}
+      <div className="mt-4 flex items-center sm:mt-0">
         {status === "loading" && (
           <div>
             <svg
