@@ -18,7 +18,7 @@ function TOSNav() {
           />
         </Link>
         <Link
-          href="/tos"
+          href="/terms-of-service"
           className="px-1 text-xl font-extrabold text-[#222328]"
         >
           / Terms of Service

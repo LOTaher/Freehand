@@ -35,7 +35,7 @@ function HomeNav() {
   }, []);
 
   const headerClass = `mx-auto flex max-w-7xl justify-between px-4 sm:px-8 py-4 ${
-    isScrolled ? "bg-white bg-opacity-50" : ""
+    isScrolled ? "bg-white bg-opacity-70" : ""
   } ${isScrolled ? "sticky top-0 z-50" : ""}`;
 
   return (
