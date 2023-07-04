@@ -87,9 +87,9 @@ const SignIn: NextPage = () => {
         )}
         <p className="mt-2 pt-2 text-sm text-gray-500">
           By signing in, you agree to our{" "}
-          <a className="text-blue-500" href="/terms-of-service">
+          <Link className="text-blue-500" href="/terms-of-service">
             Terms of Service.
-          </a>
+          </Link>
         </p>
       </div>
     </>
