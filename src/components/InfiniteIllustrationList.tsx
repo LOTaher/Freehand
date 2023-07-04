@@ -7,7 +7,6 @@ type Illustration = {
   id: string;
   title: string;
   src: string;
-  link: string;
 };
 
 interface InfiniteIllustrationListProps {
