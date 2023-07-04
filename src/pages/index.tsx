@@ -34,13 +34,13 @@ function HomeNav() {
     };
   }, []);
 
-  const headerClass = `mx-auto flex max-w-7xl justify-between py-4 sm:px-8 ${
+  const headerClass = `mx-auto flex max-w-7xl justify-between px-4 sm:px-8 py-4 ${
     isScrolled ? "bg-white bg-opacity-50" : ""
   } ${isScrolled ? "sticky top-0 z-50" : ""}`;
 
   return (
     <header className={headerClass}>
-      <div className="flex items-center px-4 py-2">
+      <div className="flex items-center py-2">
         <Link href="/">
           <Image
             src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
