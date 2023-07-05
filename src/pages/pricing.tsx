@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { CheckmarkIcon, StripeIcon } from "~/components/Icons";
 import {
@@ -18,9 +18,28 @@ import { Footer } from "~/components/Footer";
 
 function PricingNav() {
   const { data: session, status } = useSession();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      setIsScrolled(scrollTop > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerClass = `mx-auto flex max-w-7xl justify-between px-4 sm:px-8 py-4 ${
+    isScrolled ? "bg-white bg-opacity-70" : ""
+  } ${isScrolled ? "sticky top-0 z-50" : ""}`;
+
   return (
-    <div className="mx-auto flex max-w-7xl justify-between py-6 sm:px-8">
-      <div className="flex items-center px-4 py-2">
+    <div className={headerClass}>
+      <div className="flex items-center py-2">
         <Link href="/">
           <Image
             src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
@@ -128,7 +147,7 @@ const Pricing: NextPage = () => {
       if (!session) {
         window.location.href = "/sign-in";
       }
-    }, 1000);
+    }, 2000);
   }, [session]);
 
   return (
