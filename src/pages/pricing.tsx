@@ -11,10 +11,10 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "components/ui/dropdown-menu";
-import router from "next/router";
+} from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { Footer } from "~/components/Footer";
+import { useRouter } from "next/router";
 
 function PricingNav() {
   const { data: session, status } = useSession();
@@ -141,14 +141,11 @@ const Pricing: NextPage = () => {
   const { buySubscription } = useBuySubscription();
 
   const { data: session } = useSession();
+  const router = useRouter();
 
-  useEffect(() => {
-    setTimeout(() => {
-      if (!session) {
-        window.location.href = "/sign-in";
-      }
-    }, 2000);
-  }, [session]);
+  if (!session) {
+    void router.push("/sign-in");
+  }
 
   return (
     <>
