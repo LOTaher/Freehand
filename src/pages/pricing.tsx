@@ -143,10 +143,6 @@ const Pricing: NextPage = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  if (!session) {
-    void router.push("/sign-in");
-  }
-
   return (
     <>
       <Head>
@@ -157,78 +153,72 @@ const Pricing: NextPage = () => {
 
       <PricingNav />
 
-      {session && (
-        <div className="mb-6 mt-16 bg-white">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900">
-                Unlock Full Access
-              </h2>
-              <p className="mt-4 text-lg font-normal text-gray-600">
-                Support us and get complete access to our collection.
-              </p>
-            </div>
+      <div className="mb-6 mt-16 bg-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-4xl font-extrabold text-gray-900">
+              Unlock Full Access
+            </h2>
+            <p className="mt-4 text-lg font-normal text-gray-600">
+              Support us and get complete access to our collection.
+            </p>
+          </div>
 
-            {/* One-Time Payment */}
-            <div className="mt-7 flex items-center justify-center">
-              <div className="max-w-md overflow-hidden rounded-lg bg-white shadow-md">
-                <div className="p-6">
-                  <h3 className="text-center text-2xl font-bold text-gray-900">
-                    One-Time Payment
-                  </h3>
-                  <p className="mt-2 text-center text-3xl font-bold text-gray-900 dark:text-white">
-                    $4.99
+          {/* One-Time Payment */}
+          <div className="mt-7 flex items-center justify-center">
+            <div className="max-w-md overflow-hidden rounded-lg bg-white shadow-md">
+              <div className="p-6">
+                <h3 className="text-center text-2xl font-bold text-gray-900">
+                  One-Time Payment
+                </h3>
+                <p className="mt-2 text-center text-3xl font-bold text-gray-900 dark:text-white">
+                  $4.99
+                </p>
+                <div className="mt-4 flex items-center">
+                  <CheckmarkIcon />
+                  <p className="ml-2 text-gray-600">
+                    Full access to the entire collection of illustrations.
                   </p>
-                  <div className="mt-4 flex items-center">
-                    <CheckmarkIcon />
-                    <p className="ml-2 text-gray-600">
-                      Full access to the entire collection of illustrations.
-                    </p>
-                  </div>
-                  <div className="mt-4 flex items-center">
-                    <CheckmarkIcon />
-                    <p className="ml-2 text-gray-600">Support our team.</p>
-                  </div>
-                  <div className="mt-8 text-center">
-                    {session && session.user.subscription === "FREE" && (
-                      <button
-                        className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={() => {
-                          buySubscription().catch(console.error);
-                        }}
-                      >
-                        Checkout with <StripeIcon />
-                      </button>
-                    )}
-                    {session && session.user.subscription === "PRO" && (
-                      <button
-                        className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        disabled={true}
-                      >
-                        Purchased
-                      </button>
-                    )}
-                    {!session && (
-                      <button
-                        className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        onClick={() => router.push("/sign-in")}
-                      >
-                        Checkout with <StripeIcon />
-                      </button>
-                    )}
-                  </div>
+                </div>
+                <div className="mt-4 flex items-center">
+                  <CheckmarkIcon />
+                  <p className="ml-2 text-gray-600">Support our team.</p>
+                </div>
+                <div className="mt-8 text-center">
+                  {session && session.user.subscription === "FREE" && (
+                    <button
+                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => {
+                        buySubscription().catch(console.error);
+                      }}
+                    >
+                      Checkout with <StripeIcon />
+                    </button>
+                  )}
+                  {session && session.user.subscription === "PRO" && (
+                    <button
+                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      disabled={true}
+                    >
+                      Purchased
+                    </button>
+                  )}
+                  {!session && (
+                    <button
+                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      onClick={() => router.push("/sign-in")}
+                    >
+                      Sign In
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )}
-
-      {!session && <div></div>}
-
-      <div className="">
-        <Footer />
       </div>
+
+      <Footer />
     </>
   );
 };
