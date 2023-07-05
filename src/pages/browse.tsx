@@ -15,13 +15,13 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { Input } from "../../components/ui/input";
-import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { useEffect, useState } from "react";
 import Modal from "../../src/components/Modal";
 import { UploadButton } from "@uploadthing/react";
 import toast from "react-hot-toast";
 import type { OurFileRouter } from "~/server/uploadthing";
 import "@uploadthing/react/styles.css";
+import { useRouter } from "next/router";
 
 function BrowseNav() {
   const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ function BrowseNav() {
       },
     });
 
-  const { buySubscription } = useBuySubscription();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -93,11 +93,11 @@ function BrowseNav() {
         {session && (
           <button
             onClick={() => {
-              buySubscription().catch(console.error);
+              void router.push("/pricing");
             }}
             className="font-inter rounded-md px-4 py-2 font-medium text-gray-700 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-900"
           >
-            Plan
+            Pricing
           </button>
         )}
         {status === "loading" && (

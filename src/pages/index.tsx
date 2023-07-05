@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Footer } from "~/components/Footer";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { CheckmarkIcon } from "~/components/Icons";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import {
@@ -215,6 +214,7 @@ const Landing: NextPage = () => {
         </motion.div>
       </div>
 
+      {/* About */}
       <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
         <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
           <div className="flex items-center justify-center px-4">
@@ -259,7 +259,7 @@ const Landing: NextPage = () => {
                 variants={FADE_UP_ANIMATION_VARIANT}
                 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white"
               >
-                License
+                About
               </motion.h1>
               <motion.p
                 variants={FADE_UP_ANIMATION_VARIANT}
@@ -275,11 +275,12 @@ const Landing: NextPage = () => {
         </div>
       </div>
 
+      {/* License */}
       <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
         <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
           <div className="flex flex-col content-start items-center justify-center px-4">
             <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-              Lorem
+              License
             </h1>
             <p className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
@@ -291,7 +292,7 @@ const Landing: NextPage = () => {
           </div>
           <div className="flex items-center justify-center">
             <Image
-              src="https://uploadthing.com/f/e364008e-5e45-45e4-88ee-d47bb7e70f7a_undraw_drink_coffee_jdqb.svg"
+              src="https://uploadthing.com/f/2b492cf3-1abe-4f12-8ddf-e931b72fd95f_undraw_in_love_q0bn.svg"
               alt="Placeholder"
               className="pointer-events-none mt-2 aspect-square"
               width={400}
@@ -301,67 +302,46 @@ const Landing: NextPage = () => {
         </div>
       </div>
 
-      {/* Pricing Section */}
+      {/* Pricing */}
+      <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
+        <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
+          <div className="flex items-center justify-center">
+            <Image
+              src="https://uploadthing.com/f/2b492cf3-1abe-4f12-8ddf-e931b72fd95f_undraw_in_love_q0bn.svg"
+              alt="Placeholder"
+              className="pointer-events-none mt-2 aspect-square"
+              width={400}
+              height={400}
+            />
+          </div>
+          <div className="flex flex-col content-start items-center justify-center px-4">
+            <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
+              Pricing
+            </h1>
+            <p className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
+              nunc eget odio ultricies aliquet. Nulla facilisi. Donec
+              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
+              augue, eget aliquam nisl nunc eget odio. Nulla facilisi. Donec
+              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Community Section */}
       <div className="mb-6 mt-16 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl font-extrabold text-gray-900">
-              Unlock Full Access
+              Join Our Community
             </h2>
             <p className="mt-4 text-lg font-normal text-gray-600">
-              Support us and get complete access to our collection.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis
+              iure reiciendis aut cum nobis molestias cumque, fuga nesciunt
+              laudantium sed incidunt, sint asperiores odit ratione porro
+              veritatis quia quas saepe?
             </p>
-          </div>
-
-          {/* One-Time Payment */}
-          <div className="mt-7 flex items-center justify-center">
-            <div className="max-w-md overflow-hidden rounded-lg bg-white shadow-md">
-              <div className="p-6">
-                <h3 className="text-center text-2xl font-bold text-gray-900">
-                  One-Time Payment
-                </h3>
-                <p className="mt-2 text-center text-3xl font-bold text-gray-900 dark:text-white">
-                  $4.99
-                </p>
-                <div className="mt-4 flex items-center">
-                  <CheckmarkIcon />
-                  <p className="ml-2 text-gray-600">
-                    Full access to the entire collection of illustrations.
-                  </p>
-                </div>
-                <div className="mt-4 flex items-center">
-                  <CheckmarkIcon />
-                  <p className="ml-2 text-gray-600">Support our team.</p>
-                </div>
-                <div className="mt-8 text-center">
-                  {session && session.user.subscription === "FREE" && (
-                    <button
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => router.push("/pricing")}
-                    >
-                      Get it Now
-                    </button>
-                  )}
-                  {session && session.user.subscription === "PRO" && (
-                    <button
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => router.push("/pricing")}
-                      disabled={true}
-                    >
-                      Purchased
-                    </button>
-                  )}
-                  {!session && (
-                    <button
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => router.push("/sign-in")}
-                    >
-                      Get it Now
-                    </button>
-                  )}
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
