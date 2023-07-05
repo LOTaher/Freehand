@@ -135,7 +135,7 @@ const Illustration: FC<IllustrationItemProps> = ({
             <>
               {session.user.subscription === "FREE" && user.downloads > 0 && (
                 <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
-                  {user.downloads} Free Downloads Remaining
+                  Free Downloads Remaining: {user.downloads}
                 </Badge>
               )}
               {session.user.subscription === "FREE" && user.downloads <= 0 && (

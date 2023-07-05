@@ -124,9 +124,11 @@ const Pricing: NextPage = () => {
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (!session) {
-      window.location.href = "/sign-in";
-    }
+    setTimeout(() => {
+      if (!session) {
+        window.location.href = "/sign-in";
+      }
+    }, 1000);
   }, [session]);
 
   return (
