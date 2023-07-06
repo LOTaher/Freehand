@@ -424,10 +424,12 @@ const Landing: NextPage = () => {
                     </div>
                   </div>
                   <CardContent className="mt-auto flex-grow">
-                    <p className="text-md text-gray-700">
-                      {testimonial.content}
-                    </p>
-                    <div className="mt-0 flex justify-end">
+                    <div className="flex h-full flex-col justify-center">
+                      <p className="text-md text-gray-700">
+                        {testimonial.content}
+                      </p>
+                    </div>
+                    <div className="mt-[-6px] flex justify-end">
                       <p className="text-xs text-gray-500">
                         {testimonial.date}
                       </p>
