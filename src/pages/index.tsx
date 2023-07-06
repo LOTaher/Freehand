@@ -15,12 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardTitle,
-} from "components/ui/card";
+import { Card } from "components/ui/card";
 
 const testimonials = [
   {
@@ -407,8 +402,8 @@ const Landing: NextPage = () => {
                 target="_blank"
                 className="text-gray-900"
               >
-                <Card className="flex h-[210px] w-[310px] flex-col justify-between rounded-lg border border-gray-200 p-4">
-                  <div className="mb-2 flex items-center">
+                <Card className="flex h-[210px] w-[310px] flex-col rounded-lg border border-gray-200 p-4">
+                  <div className="mb-3 flex items-center">
                     <Image
                       className="h-10 w-10 rounded-full"
                       src={testimonial.author.image}
@@ -417,24 +412,24 @@ const Landing: NextPage = () => {
                       height={40}
                     />
                     <div className="ml-3">
-                      <CardTitle>{testimonial.author.name}</CardTitle>
-                      <CardDescription>
-                        {testimonial.author.handle}
-                      </CardDescription>
+                      <div className="font-bold">{testimonial.author.name}</div>
+                      <div>{testimonial.author.handle}</div>
                     </div>
                   </div>
-                  <CardContent className="mt-auto flex-grow">
-                    <div className="flex h-full flex-col justify-center">
-                      <p className="text-md text-gray-700">
-                        {testimonial.content}
-                      </p>
+                  <div className="flex-grow">
+                    <div className="flex flex-col justify-between">
+                      <div>
+                        <p className="text-md text-gray-700">
+                          {testimonial.content}
+                        </p>
+                      </div>
+                      <div className="mt-3 flex justify-end">
+                        <p className="text-xs text-gray-500">
+                          {testimonial.date}
+                        </p>
+                      </div>
                     </div>
-                    <div className="mt-[-6px] flex justify-end">
-                      <p className="text-xs text-gray-500">
-                        {testimonial.date}
-                      </p>
-                    </div>
-                  </CardContent>
+                  </div>
                 </Card>
               </a>
             ))}
