@@ -15,6 +15,51 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "components/ui/card";
+
+const testimonials = [
+  {
+    content:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis iure reiciendis aut cum nobis molestias cumque, fuga nesciunt",
+    url: "https://twitter.com/splattedev",
+    date: "9:15 PM · Jul 5, 2023",
+    author: {
+      name: "Laith Taher",
+      image:
+        "https://pbs.twimg.com/profile_images/1608530508128059394/ENgqYiIu_400x400.jpg",
+      handle: "@SplatteDev",
+    },
+  },
+  {
+    content:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis iure reiciendis aut cum nobis molestias cumque, fuga nesciunt",
+    url: "https://twitter.com/splattedev",
+    date: "9:15 PM · Jul 5, 2023",
+    author: {
+      name: "Laith Taher",
+      image:
+        "https://pbs.twimg.com/profile_images/1608530508128059394/ENgqYiIu_400x400.jpg",
+      handle: "@SplatteDev",
+    },
+  },
+  {
+    content:
+      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis iure reiciendis aut cum nobis molestias cumque, fuga nesciunt",
+    url: "https://twitter.com/splattedev",
+    date: "9:15 PM · Jul 5, 2023",
+    author: {
+      name: "Laith Taher",
+      image:
+        "https://pbs.twimg.com/profile_images/1608530508128059394/ENgqYiIu_400x400.jpg",
+      handle: "@SplatteDev",
+    },
+  },
+];
 
 function HomeNav() {
   const { data: session, status } = useSession();
@@ -339,7 +384,7 @@ const Landing: NextPage = () => {
       </div>
 
       {/* Community Section */}
-      <div className="mb-6 mt-16 bg-white">
+      <div className="mb-6 mt-10 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h2 className="text-4xl font-extrabold text-gray-900">
@@ -351,6 +396,46 @@ const Landing: NextPage = () => {
               laudantium sed incidunt, sint asperiores odit ratione porro
               veritatis quia quas saepe?
             </p>
+          </div>
+        </div>
+        <div className="mx-auto flex content-center justify-center pt-6">
+          <div className="grid justify-center gap-x-6 gap-y-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
+            {testimonials.map((testimonial) => (
+              <a
+                href={testimonial.url}
+                key={testimonial.author.name}
+                target="_blank"
+                className="text-gray-900"
+              >
+                <Card className="flex h-[210px] w-[310px] flex-col justify-between rounded-lg border border-gray-200 p-4">
+                  <div className="mb-2 flex items-center">
+                    <Image
+                      className="h-10 w-10 rounded-full"
+                      src={testimonial.author.image}
+                      alt={testimonial.author.name}
+                      width={40}
+                      height={40}
+                    />
+                    <div className="ml-3">
+                      <CardTitle>{testimonial.author.name}</CardTitle>
+                      <CardDescription>
+                        {testimonial.author.handle}
+                      </CardDescription>
+                    </div>
+                  </div>
+                  <CardContent className="mt-auto flex-grow">
+                    <p className="text-md text-gray-700">
+                      {testimonial.content}
+                    </p>
+                    <div className="mt-0 flex justify-end">
+                      <p className="text-xs text-gray-500">
+                        {testimonial.date}
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </a>
+            ))}
           </div>
         </div>
       </div>
