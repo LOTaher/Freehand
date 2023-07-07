@@ -59,7 +59,6 @@ const testimonials = [
 function HomeNav() {
   const { data: session, status } = useSession();
   const [isScrolled, setIsScrolled] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {

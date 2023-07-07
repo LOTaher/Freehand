@@ -21,7 +21,6 @@ import { UploadButton } from "@uploadthing/react";
 import toast from "react-hot-toast";
 import type { OurFileRouter } from "~/server/uploadthing";
 import "@uploadthing/react/styles.css";
-import { useRouter } from "next/router";
 
 function BrowseNav() {
   const [open, setOpen] = useState(false);
@@ -50,8 +49,6 @@ function BrowseNav() {
         }
       },
     });
-
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {

@@ -14,7 +14,6 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { Footer } from "~/components/Footer";
-import { useRouter } from "next/router";
 
 function PricingNav() {
   const { data: session, status } = useSession();
@@ -136,7 +135,6 @@ const Pricing: NextPage = () => {
   const { buySubscription } = useBuySubscription();
 
   const { data: session } = useSession();
-  const router = useRouter();
 
   return (
     <>
@@ -199,12 +197,12 @@ const Pricing: NextPage = () => {
                     </button>
                   )}
                   {!session && (
-                    <button
+                    <Link
                       className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      onClick={() => router.push("/sign-in")}
+                      href={"/sign-in"}
                     >
                       Sign In
-                    </button>
+                    </Link>
                   )}
                 </div>
               </div>
