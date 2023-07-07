@@ -142,12 +142,7 @@ function HomeNav() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="mx-auto my-1 rounded-md border bg-white px-2 py-1">
                 <DropdownMenuItem className="font-inter rounded-md px-3 py-2 text-center font-semibold text-gray-700 transition-colors duration-200 hover:bg-gray-100 hover:text-gray-900 focus:outline-none">
-                  <a
-                    href="https://billing.stripe.com/p/login/test_fZebJw7W95oRfCg3cc"
-                    target="_blank"
-                  >
-                    Tier: {session.user.subscription}
-                  </a>
+                  <Link href="/pricing">Tier: {session.user.subscription}</Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
