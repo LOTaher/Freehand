@@ -61,7 +61,7 @@ const SignIn: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NoNameYet • Sign-In</title>
+        <title>Freehand • Sign-In</title>
         <meta name="description" content="DESCRIPTION HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

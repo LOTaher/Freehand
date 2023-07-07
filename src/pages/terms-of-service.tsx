@@ -52,7 +52,7 @@ const TOS: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NoNameYet • Terms of Service</title>
+        <title>Freehand • Terms of Service</title>
         <meta name="description" content="DESCRIPTION HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

@@ -139,7 +139,7 @@ const Pricing: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NoNameYet • Pricing</title>
+        <title>Freehand • Pricing</title>
         <meta name="description" content="DESCRIPTION HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

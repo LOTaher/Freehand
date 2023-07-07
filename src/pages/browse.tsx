@@ -242,7 +242,7 @@ const Browse: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NoNameYet • Browse</title>
+        <title>Freehand • Browse</title>
         <meta name="description" content="DESCRIPTION HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

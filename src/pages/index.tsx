@@ -17,6 +17,9 @@ import {
 import { useEffect, useState } from "react";
 import { Card } from "components/ui/card";
 
+// #269e91
+// #25998d hover
+
 const testimonials = [
   {
     content:
@@ -187,7 +190,7 @@ const Landing: NextPage = () => {
   return (
     <>
       <Head>
-        <title>NoNameYet</title>
+        <title>Freehand</title>
         <meta name="description" content="DESCRIPTION HERE" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
