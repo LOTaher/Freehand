@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Head from "next/head";
-import { CheckmarkIcon, StripeIcon } from "~/components/Icons";
+import { CheckmarkIcon } from "~/components/Icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -192,7 +192,7 @@ const Pricing: NextPage = () => {
                         buySubscription().catch(console.error);
                       }}
                     >
-                      Checkout with <StripeIcon />
+                      Checkout with Stripe
                     </button>
                   )}
                   {session && session.user.subscription === "PRO" && (
