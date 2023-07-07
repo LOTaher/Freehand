@@ -346,33 +346,6 @@ const Landing: NextPage = () => {
         </div>
       </div>
 
-      {/* Pricing */}
-      <div className="max-w-screen mx-auto flex content-center justify-center bg-white text-center dark:bg-gray-900 lg:px-12">
-        <div className="mx-auto grid max-w-screen-lg grid-cols-1 gap-x-2 gap-y-2 sm:grid-cols-2 sm:gap-y-2 lg:mx-0">
-          <div className="flex items-center justify-center">
-            <Image
-              src="https://uploadthing.com/f/2b492cf3-1abe-4f12-8ddf-e931b72fd95f_undraw_in_love_q0bn.svg"
-              alt="Placeholder"
-              className="pointer-events-none mt-2 aspect-square"
-              width={400}
-              height={400}
-            />
-          </div>
-          <div className="flex flex-col content-start items-center justify-center px-4">
-            <h1 className="text-4xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">
-              Pricing
-            </h1>
-            <p className="mx-2 mb-2 mt-3 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a
-              nunc eget odio ultricies aliquet. Nulla facilisi. Donec
-              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
-              augue, eget aliquam nisl nunc eget odio. Nulla facilisi. Donec
-              vestibulum, nunc eget aliquam ultricies, nunc velit ultrices
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Community Section */}
       <div className="mb-6 mt-10 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">

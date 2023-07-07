@@ -77,7 +77,7 @@ const SignIn: NextPage = () => {
       <br></br>
       <div className="mx-auto mt-8 w-full rounded-md px-6 py-8 shadow-lg sm:max-w-md">
         <h1 className="text-4xl font-extrabold text-gray-800">Sign-In</h1>
-        <p className="mt-2 text-lg text-gray-500">To continue to NoNameYet</p>
+        <p className="mt-2 text-lg text-gray-500">To continue to Freehand</p>
         {session && <div></div>}
         {!session && (
           <div className="flex flex-col">
