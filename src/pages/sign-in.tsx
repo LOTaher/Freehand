@@ -62,7 +62,10 @@ const SignIn: NextPage = () => {
     <>
       <Head>
         <title>Freehand • Sign-In</title>
-        <meta name="description" content="DESCRIPTION HERE" />
+        <meta
+          name="description"
+          content="🖋️ Open Source Illustrations designed to elevate your next project."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
