@@ -213,7 +213,12 @@ const Pricing: NextPage = () => {
           </div>
         </div>
       </div>
-
+      {/* Another line break incident */}
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Footer />
     </>
   );
