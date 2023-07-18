@@ -21,6 +21,7 @@ import { UploadButton } from "@uploadthing/react";
 import toast from "react-hot-toast";
 import type { OurFileRouter } from "~/server/uploadthing";
 import "@uploadthing/react/styles.css";
+import { Logo } from "~/components/Logo";
 
 function BrowseNav() {
   const [open, setOpen] = useState(false);
@@ -71,13 +72,7 @@ function BrowseNav() {
     <header className={headerClass}>
       <div className="flex items-center py-2">
         <Link href="/">
-          <Image
-            src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
-            alt="logo"
-            className=""
-            height={40}
-            width={40}
-          />
+          <Logo />
         </Link>
         <Link
           href="/browse"

@@ -16,6 +16,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useEffect, useState } from "react";
 import { Card } from "components/ui/card";
+import { Logo } from "~/components/Logo";
 
 // #269e91
 // #25998d hover
@@ -84,13 +85,7 @@ function HomeNav() {
     <header className={headerClass}>
       <div className="flex items-center py-2">
         <Link href="/">
-          <Image
-            src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
-            alt="logo"
-            className=""
-            height={40}
-            width={40}
-          />
+          <Logo />
         </Link>
       </div>
       <div className="mt-4 flex items-center sm:mt-0">

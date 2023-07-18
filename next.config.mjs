@@ -14,7 +14,6 @@ const config = {
     domains: [
       "avatars.githubusercontent.com",
       "bit.ly",
-      "cdn.discordapp.com",
       "uploadthing.com",
       "lh3.googleusercontent.com",
       "pbs.twimg.com",

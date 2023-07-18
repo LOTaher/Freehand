@@ -4,8 +4,8 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { GithubIcon, GoogleIcon } from "~/components/Icons";
 import Link from "next/link";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Logo } from "~/components/Logo";
 
 function SignInNav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,13 +31,7 @@ function SignInNav() {
     <div className={headerClass}>
       <div className="flex items-center py-2">
         <Link href="/">
-          <Image
-            src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
-            alt="logo"
-            className=""
-            height={40}
-            width={40}
-          />
+          <Logo />
         </Link>
         <Link
           href="/sign-in"

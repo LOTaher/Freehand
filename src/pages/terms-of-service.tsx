@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import { Footer } from "~/components/Footer";
 import { useState, useEffect } from "react";
+import { Logo } from "~/components/Logo";
 
 function TOSNav() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,13 +29,7 @@ function TOSNav() {
     <div className={headerClass}>
       <div className="flex items-center py-2">
         <Link href="/">
-          <Image
-            src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
-            alt="logo"
-            className=""
-            height={40}
-            width={40}
-          />
+          <Logo />
         </Link>
         <Link
           href="/terms-of-service"

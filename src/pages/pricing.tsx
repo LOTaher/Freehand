@@ -14,6 +14,7 @@ import {
 } from "@radix-ui/react-dropdown-menu";
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { Footer } from "~/components/Footer";
+import { Logo } from "~/components/Logo";
 
 function PricingNav() {
   const { data: session, status } = useSession();
@@ -40,13 +41,7 @@ function PricingNav() {
     <div className={headerClass}>
       <div className="flex items-center py-2">
         <Link href="/">
-          <Image
-            src="https://cdn.discordapp.com/attachments/881202202000578580/881202233190492180/Logo.png"
-            alt="logo"
-            className=""
-            height={40}
-            width={40}
-          />
+          <Logo />
         </Link>
         <Link
           href="/sign-in"
