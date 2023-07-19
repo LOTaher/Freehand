@@ -134,12 +134,12 @@ const Illustration: FC<IllustrationItemProps> = ({
           {session && user ? (
             <>
               {session.user.subscription === "FREE" && user.downloads > 0 && (
-                <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                <Badge className="mb-2 rounded-md bg-[#3299AF] px-1 text-sm text-white">
                   Free Downloads Remaining: {user.downloads}
                 </Badge>
               )}
               {session.user.subscription === "FREE" && user.downloads <= 0 && (
-                <Badge className="mb-2 rounded-md bg-[#6469ff] px-1 text-sm text-white">
+                <Badge className="mb-2 rounded-md bg-[#3299AF] px-1 text-sm text-white">
                   No Free Downloads Remaining
                 </Badge>
               )}
@@ -162,7 +162,7 @@ const Illustration: FC<IllustrationItemProps> = ({
                   (session.user.subscription === "FREE" &&
                     user.downloads > 0)) && (
                   <button
-                    className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="font-inter py-23 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     onClick={() => handleDownload()}
                     disabled={isDecrementing}
                   >
@@ -172,7 +172,7 @@ const Illustration: FC<IllustrationItemProps> = ({
                 {session?.user.subscription === "FREE" &&
                   user.downloads <= 0 && (
                     <button
-                      className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="font-inter py-23 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => router.push("/pricing")}
                     >
                       Buy Full Access
@@ -183,7 +183,7 @@ const Illustration: FC<IllustrationItemProps> = ({
               <>
                 <button
                   onClick={() => router.push("/sign-in")}
-                  className="font-inter py-23 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="font-inter py-23 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Sign In
                 </button>

@@ -114,7 +114,7 @@ function PricingNav() {
         {status === "unauthenticated" && (
           <>
             <Link
-              className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="font-inter ml-4 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               href="/sign-in"
             >
               Sign In
@@ -178,7 +178,7 @@ const Pricing: NextPage = () => {
                 <div className="mt-8 text-center">
                   {session && session.user.subscription === "FREE" && (
                     <button
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="font-inter ml-4 inline-block rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       onClick={() => {
                         buySubscription().catch(console.error);
                       }}
@@ -188,7 +188,7 @@ const Pricing: NextPage = () => {
                   )}
                   {session && session.user.subscription === "PRO" && (
                     <button
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="font-inter ml-4 inline-block rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:cursor-not-allowed hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       disabled={true}
                     >
                       Purchased
@@ -196,7 +196,7 @@ const Pricing: NextPage = () => {
                   )}
                   {!session && (
                     <Link
-                      className="font-inter ml-4 inline-block rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                      className="font-inter ml-4 inline-block rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                       href={"/sign-in"}
                     >
                       Sign In

@@ -141,7 +141,7 @@ function HomeNav() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
-                <DropdownMenuItem className="font-inter rounded-md bg-[#6469ff] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-indigo-500 focus:outline-none">
+                <DropdownMenuItem className="font-inter rounded-md bg-[#3299AF] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-[#2f8ca1] focus:outline-none">
                   <button
                     className="focus:outline-none"
                     onClick={() => {
@@ -158,7 +158,7 @@ function HomeNav() {
         {status === "unauthenticated" && (
           <>
             <Link
-              className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="font-inter ml-4 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               href="/sign-in"
             >
               Sign In
@@ -231,7 +231,7 @@ const Landing: NextPage = () => {
                 <motion.button
                   onClick={() => router.push("/browse")}
                   variants={FADE_DOWN_ANIMATION_VARIANT}
-                  className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="font-inter ml-4 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Get Started
                 </motion.button>
@@ -239,7 +239,7 @@ const Landing: NextPage = () => {
                 <motion.button
                   onClick={() => router.push("/sign-in")}
                   variants={FADE_DOWN_ANIMATION_VARIANT}
-                  className="font-inter ml-4 rounded-md bg-[#6469ff] px-4 py-2 font-medium text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="font-inter ml-4 rounded-md bg-[#3299AF] px-4 py-2 font-medium text-white hover:bg-[#2f8ca1] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Get Started
                 </motion.button>
