@@ -15,6 +15,7 @@ import {
 import { useBuySubscription } from "~/hooks/useBuySubscription";
 import { Footer } from "~/components/Footer";
 import { Logo } from "~/components/Logo";
+import { motion } from "framer-motion";
 
 function PricingNav() {
   const { data: session, status } = useSession();
@@ -131,6 +132,11 @@ const Pricing: NextPage = () => {
 
   const { data: session } = useSession();
 
+  const FADE_DOWN_ANIMATION_VARIANT = {
+    hidden: { opacity: 0, y: -10 },
+    show: { opacity: 1, y: 0, transition: { type: "spring" } },
+  };
+
   return (
     <>
       <Head>
@@ -147,12 +153,32 @@ const Pricing: NextPage = () => {
       <div className="mb-6 mt-16 bg-white">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="text-4xl font-extrabold text-gray-900">
-              Unlock Full Access
-            </h2>
-            <p className="mt-4 text-lg font-normal text-gray-600">
-              Support us and get complete access to our collection.
-            </p>
+            <motion.div
+              initial="hidden"
+              animate="show"
+              viewport={{ once: true }}
+              variants={{
+                hidden: {},
+                show: {
+                  transition: {
+                    staggerChildren: 0.15,
+                  },
+                },
+              }}
+            >
+              <motion.h2
+                className="text-4xl font-extrabold text-gray-900"
+                variants={FADE_DOWN_ANIMATION_VARIANT}
+              >
+                Unlock Full Access
+              </motion.h2>
+              <motion.p
+                className="mt-4 text-lg font-normal text-gray-600"
+                variants={FADE_DOWN_ANIMATION_VARIANT}
+              >
+                Support us and get complete access to our collection.
+              </motion.p>
+            </motion.div>
           </div>
 
           {/* One-Time Payment */}
