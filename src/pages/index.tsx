@@ -87,6 +87,7 @@ function HomeNav() {
         <Link href="/">
           <Logo />
         </Link>
+        <div className="px-4 text-2xl font-extrabold">Freehand</div>
       </div>
       <div className="mt-4 flex items-center sm:mt-0">
         <Link
@@ -222,9 +223,8 @@ const Landing: NextPage = () => {
               variants={FADE_DOWN_ANIMATION_VARIANT}
               className="mb-8 text-lg font-normal text-gray-500 dark:text-gray-400 sm:px-4 md:px-16 lg:text-xl xl:px-48"
             >
-              Explore a curated collection of exquisite, free, and instantly
-              usable handmade illustrations, designed to elevate your next
-              project.
+              Explore a curated collection of exquisite and instantly usable
+              handmade illustrations, designed to elevate your next project.
             </motion.p>
             <div className="mb-8 flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0 lg:mb-16">
               {session ? (

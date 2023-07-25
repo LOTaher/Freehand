@@ -35,7 +35,7 @@ function SignInNav() {
         </Link>
         <Link
           href="/sign-in"
-          className="px-1 text-xl font-extrabold text-[#222328]"
+          className="px-1 text-2xl font-extrabold text-[#222328]"
         >
           / Sign-In
         </Link>

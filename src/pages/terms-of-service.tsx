@@ -33,7 +33,7 @@ function TOSNav() {
         </Link>
         <Link
           href="/terms-of-service"
-          className="px-1 text-xl font-extrabold text-[#222328]"
+          className="px-1 text-2xl font-extrabold text-[#222328]"
         >
           / Terms of Service
         </Link>

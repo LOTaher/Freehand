@@ -76,7 +76,7 @@ function BrowseNav() {
         </Link>
         <Link
           href="/browse"
-          className="px-1 text-xl font-extrabold text-[#222328]"
+          className="px-1 text-2xl font-extrabold text-[#222328]"
         >
           / Browse
         </Link>

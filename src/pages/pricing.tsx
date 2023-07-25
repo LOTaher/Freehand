@@ -45,7 +45,7 @@ function PricingNav() {
         </Link>
         <Link
           href="/sign-in"
-          className="px-1 text-xl font-extrabold text-[#222328]"
+          className="px-1 text-2xl font-extrabold text-[#222328]"
         >
           / Pricing
         </Link>
@@ -97,7 +97,7 @@ function PricingNav() {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
                 <DropdownMenuSeparator className="my-1 border-gray-200" />
-                <DropdownMenuItem className="font-inter rounded-md bg-[#6469ff] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-indigo-500 focus:outline-none">
+                <DropdownMenuItem className="font-inter rounded-md bg-[#3299AF] px-3 py-2 text-center font-semibold text-white transition-colors duration-200 hover:bg-[#2f8ca1] focus:outline-none">
                   <button
                     className="focus:outline-none"
                     onClick={() => {
