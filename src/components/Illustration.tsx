@@ -121,7 +121,7 @@ const Illustration: FC<IllustrationItemProps> = ({
             </div>
 
             <div className="inline-flex items-baseline gap-2">
-              <h2 className="cursor-pointer text-base font-semibold text-gray-700 sm:text-3xl md:text-xl lg:text-xl">
+              <h2 className="cursor-pointer text-3xl font-semibold text-gray-700 sm:text-4xl md:text-2xl lg:text-2xl">
                 {title}
               </h2>
             </div>
