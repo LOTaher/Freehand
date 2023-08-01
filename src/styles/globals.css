@@ -5,3 +5,21 @@
 body {
   overscroll-behavior: none;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8e8f93;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #646568;
+}
