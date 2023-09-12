@@ -2,43 +2,25 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { Footer } from "~/components/Footer";
-import { useState, useEffect } from "react";
 import { Logo } from "~/components/Logo";
 
 function TOSNav() {
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
-      setIsScrolled(scrollTop > 0);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  const headerClass = `mx-auto flex max-w-7xl justify-between px-4 sm:px-8 py-4 ${
-    isScrolled ? "bg-white bg-opacity-70" : ""
-  } ${isScrolled ? "sticky top-0 z-50" : ""}`;
-
   return (
-    <div className={headerClass}>
-      <div className="flex items-center py-2">
-        <Link href="/">
-          <Logo />
-        </Link>
-        <Link
-          href="/terms-of-service"
-          className="px-1 text-2xl font-extrabold text-[#222328]"
-        >
-          / Terms of Service
-        </Link>
-      </div>
-    </div>
+    <header className="supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-50 w-full backdrop-blur">
+      <nav className="mx-auto flex max-w-7xl justify-between px-4 py-4 sm:px-8">
+        <div className="flex items-center py-2">
+          <Link href="/">
+            <Logo />
+          </Link>
+          <Link
+            href="/terms-of-service"
+            className="px-1 text-2xl font-extrabold text-[#222328]"
+          >
+            / Terms of Service
+          </Link>
+        </div>
+      </nav>
+    </header>
   );
 }
 
