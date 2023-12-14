@@ -4,27 +4,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { GithubIcon, GoogleIcon } from "~/components/Icons";
 import Link from "next/link";
-import { Logo } from "~/components/Logo";
-
-function SignInNav() {
-  return (
-    <header className="supports-backdrop-blur:bg-background/60 bg-background/95 sticky top-0 z-50 w-full backdrop-blur">
-      <nav className="mx-auto flex max-w-7xl justify-between px-4 py-4 sm:px-8">
-        <div className="flex items-center py-2">
-          <Link href="/">
-            <Logo />
-          </Link>
-          <Link
-            href="/sign-in"
-            className="px-1 text-2xl font-extrabold text-[#222328]"
-          >
-            / Sign-In
-          </Link>
-        </div>
-      </nav>
-    </header>
-  );
-}
+import SignInNav from "~/components/SignInNav";
 
 const SignIn: NextPage = () => {
   const { data: session } = useSession();
